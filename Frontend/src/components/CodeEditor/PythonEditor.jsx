@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { EditorState } from "@codemirror/state";
 import { EditorView, keymap } from "@codemirror/view";
 import { python } from "@codemirror/lang-python";
-import { defaultKeymap } from "@codemirror/commands";
+import { defaultKeymap, indentWithTab } from "@codemirror/commands";
 import { basicSetup } from "codemirror";
 import { oneDark } from "@codemirror/theme-one-dark"; // <-- 1. Add this import
 
@@ -19,7 +19,9 @@ export default function PythonEditor({ value, onChange }) {
           basicSetup,
           oneDark, // <-- 2. Add the theme to the extensions
           python(),
-          keymap.of(defaultKeymap),
+          keymap.of([
+            indentWithTab,
+            ...defaultKeymap]),
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
               const doc = update.state.doc.toString();
