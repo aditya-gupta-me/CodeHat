@@ -22,6 +22,7 @@ import DeleteAccount from "./pages/Auth/DeleteAccount";
 import Goodbye from "./pages/Auth/Goodbye";
 import TermsOfService from "./pages/TermsOfService";
 import Vision from "./pages/Vision";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 import { useAuthPersistence } from "./hooks/useAuthPersistence";
 import { detectFreshBrowserSession } from "./utils/sessionUtils";
@@ -29,7 +30,7 @@ import { detectFreshBrowserSession } from "./utils/sessionUtils";
 // Create a wrapper component for auth logic
 export const AppWithAuth = () => {
   useAuthPersistence();
-  
+
   useEffect(() => {
     // Detect fresh browser session only once when app starts
     detectFreshBrowserSession();
@@ -42,7 +43,10 @@ export const AppWithAuth = () => {
         <Route path="*" element={<PageNotFound />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password-confirmation" element={<ResetPasswordConfirmation />} />
+        <Route
+          path="/reset-password-confirmation"
+          element={<ResetPasswordConfirmation />}
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/createprofile" element={<CreateProfile />} />
@@ -58,6 +62,7 @@ export const AppWithAuth = () => {
         <Route path="/goodbye" element={<Goodbye />} />
         <Route path="/termsofservice" element={<TermsOfService />} />
         <Route path="/vision" element={<Vision />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );

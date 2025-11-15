@@ -20,14 +20,14 @@ const Vision = () => {
           <p className="text-[0.95rem] leading-relaxed mb-6">
             It all began in my first year of college, back in 2022. A small
             conversation sparked a big thought: what if there was a coding
-            platform that didn’t care about ranks, leaderboards, or popularity —
+            platform that didn't care about ranks, leaderboards, or popularity,
             just clean, anonymous problem-solving? Level-based. Fair. No
             pressure.
           </p>
 
           <p className="text-[0.95rem] leading-relaxed mb-6">
             At the time, I discussed it with a few friends. We were all excited
-            by the concept. But as time passed, everyone got busy — except me.
+            by the concept. But as time passed, everyone got busy, except me.
             The idea stayed with me, and honestly, it never left.
           </p>
 
@@ -40,7 +40,7 @@ const Vision = () => {
           <p className="text-[0.95rem] leading-relaxed mb-6">
             This platform isn’t backed by a team or a company. There’s no
             funding, no PR. Just one person who believed in the idea and
-            followed through — with code, patience, and love for clean
+            followed through, with code, patience, and love for clean
             problem-solving.
           </p>
 

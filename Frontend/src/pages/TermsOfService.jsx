@@ -4,10 +4,6 @@ import Footer from "../components/Navigation/Footer";
 const TermsAndConditions = () => {
   const email = import.meta.env.VITE_EMAIL;
 
-  const handleDeleteClick = () => {
-    window.location.href = "/delete-account"; // or wherever your delete account page is
-  };
-
   return (
     <>
       <Header />
@@ -44,9 +40,10 @@ const TermsAndConditions = () => {
 
           <h3 className="text-lg font-semibold mb-2">3. Content Ownership</h3>
           <p className="text-[0.95rem] leading-relaxed mb-5">
-            You retain ownership of the content you create, but by posting on
-            CodeHat, you grant us a non-exclusive license to display, modify, or
-            distribute your content as part of our platform services.
+            You retain full ownership of all content you create on CodeHat. Your
+            code, solutions, and any other content you post remain entirely
+            yours. We do not claim any rights to modify, distribute, or use your
+            content beyond displaying it on the platform for your use.
           </p>
 
           <h3 className="text-lg font-semibold mb-2">4. Modifications</h3>
@@ -72,19 +69,8 @@ const TermsAndConditions = () => {
             .
           </p>
 
-          {/* Subtle data control button */}
-          <div className="mt-8 text-center">
-            <button
-              onClick={handleDeleteClick}
-              className="text-sm underline text-gray-600 hover:text-gray-900 transition"
-              aria-label="Control your account data"
-            >
-              Control your account data
-            </button>
-          </div>
-
           <p className="text-sm text-gray-500 mt-10 italic">
-            Last updated: July 2025
+            Last updated: November 2025
           </p>
         </div>
       </main>
