@@ -23,6 +23,7 @@ import Goodbye from "./pages/Auth/Goodbye";
 import TermsOfService from "./pages/TermsOfService";
 import Vision from "./pages/Vision";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AboutUs from "./pages/AboutUs";
 
 import { useAuthPersistence } from "./hooks/useAuthPersistence";
 import { detectFreshBrowserSession } from "./utils/sessionUtils";
@@ -63,6 +64,7 @@ export const AppWithAuth = () => {
         <Route path="/termsofservice" element={<TermsOfService />} />
         <Route path="/vision" element={<Vision />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/about" element={<AboutUs />} />
       </Routes>
     </Router>
   );

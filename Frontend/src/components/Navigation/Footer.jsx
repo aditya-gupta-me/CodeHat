@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// Helper functions for formatting numbers
+// Format large numbers into readable format (1234 -> 1.2K)
 const formatNumber = (num) => {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(1) + "M";
@@ -12,6 +12,7 @@ const formatNumber = (num) => {
   return num.toString();
 };
 
+// Format code execution count for display
 const formatCodeExecutions = (num) => {
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(1)} million`;
@@ -22,6 +23,7 @@ const formatCodeExecutions = (num) => {
 };
 
 function Footer() {
+  // Environment variables for social media links
   const GitHubURL = import.meta.env.VITE_GITHUB;
   const X_URL = import.meta.env.VITE_X;
   const StackOverflow_URL = import.meta.env.VITE_StackOverflow;
@@ -33,11 +35,10 @@ function Footer() {
   const [codeExecutionCount, setCodeExecutionCount] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Track visitor on component mount
   useEffect(() => {
     const trackAndFetchData = async () => {
       try {
-        // Track visitor
+        // Generate or retrieve unique visitor ID from localStorage
         let visitorId = localStorage.getItem("visitorId");
 
         if (!visitorId) {
@@ -47,11 +48,12 @@ function Footer() {
           localStorage.setItem("visitorId", visitorId);
         }
 
+        // Track this visitor
         await axios.post(`${API_URL}/api/track-visitor`, {
           visitorId,
         });
 
-        // Fetch counts
+        // Fetch both counts in parallel
         const [visitorRes, executionRes] = await Promise.all([
           axios.get(`${API_URL}/api/visitor-count`),
           axios.get(`${API_URL}/api/code-execution-count`),
@@ -68,7 +70,7 @@ function Footer() {
 
     trackAndFetchData();
 
-    // Refresh counts every 30 seconds
+    // Auto-refresh counts every 30 seconds to keep data fresh
     const interval = setInterval(async () => {
       try {
         const [visitorRes, executionRes] = await Promise.all([
@@ -88,8 +90,9 @@ function Footer() {
   return (
     <footer className="bg-black dark:bg-gray-900 w-full mt-auto">
       <div className="mx-auto w-full container p-4 sm:p-6">
-        {/* Stats Section - New Addition */}
+        {/* Platform statistics - code executions and visitor count */}
         <div className="mb-8 flex flex-col md:flex-row justify-between gap-4 md:gap-8">
+          {/* Code execution counter */}
           <div className="flex items-center space-x-3 text-gray-400">
             <svg
               className="w-5 h-5 text-blue-500"
@@ -117,6 +120,7 @@ function Footer() {
             </span>
           </div>
 
+          {/* Visitor counter */}
           <div className="flex items-center space-x-3 text-gray-400 justify-end">
             <svg
               className="w-5 h-5 text-green-500"
@@ -146,7 +150,9 @@ function Footer() {
           </div>
         </div>
 
+        {/* Main footer content */}
         <div className="md:flex md:justify-between">
+          {/* Brand */}
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -154,6 +160,8 @@ function Footer() {
               </span>
             </Link>
           </div>
+
+          {/* Footer links - Resources, Company, Legal */}
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
@@ -169,6 +177,7 @@ function Footer() {
                   </a>
                 </li>
                 <li>
+                  {/* TODO: Add community features */}
                   <a
                     href="#"
                     className="hover:underline"
@@ -190,9 +199,9 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a href="you will never find me" className="hover:underline">
+                  <Link to="/about" className="hover:underline">
                     About Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -215,25 +224,42 @@ function Footer() {
             </div>
           </div>
         </div>
+
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-white-700 lg:my-8" />
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2025{" "}
-            <a href="#" className="hover:underline">
-              CodeHat™
-            </a>
-            . All Rights Reserved.
-          </span>
 
-          <span className="text-gray-400 content-center">
-            Built with ❤️ & React MUI
-          </span>
+        {/* Bottom section with copyright, tech stack, and social links */}
+        <div className="flex flex-col gap-6">
+          {/* Copyright and tech stack */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span className="text-sm text-gray-500 dark:text-gray-400 order-2 sm:order-1">
+              © 2025{" "}
+              <a href="#" className="hover:underline font-medium">
+                CodeHat™
+              </a>
+              . All Rights Reserved.
+            </span>
 
-          <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+            {/* Tech stack badge */}
+            <div className="flex items-center gap-2 text-gray-400 text-sm font-mono order-1 sm:order-2">
+              <span className="text-gray-500">Built with</span>
+              <span className="text-red-500 animate-pulse">❤</span>
+              <span className="text-gray-500">&</span>
+              <span className="px-2 py-0.5 bg-gray-800 rounded text-blue-400 font-semibold">
+                React
+              </span>
+              <span className="text-gray-600">+</span>
+              <span className="px-2 py-0.5 bg-gray-800 rounded text-cyan-400 font-semibold">
+                MUI
+              </span>
+            </div>
+          </div>
+
+          {/* Social media links */}
+          <div className="flex justify-center items-center space-x-6 pb-2">
             <a
               href={GitHubURL}
               target="_blank"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -242,16 +268,16 @@ function Footer() {
                 viewBox="0 0 24 24"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.6 9.6 0 0 1 2.496-.336 9.6 9.6 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
               <span className="sr-only">GitHub account</span>
             </a>
             <a
               href={LinkedIn_URL}
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +292,7 @@ function Footer() {
 
             <a
               href={X_URL}
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +307,7 @@ function Footer() {
 
             <a
               href={StackOverflow_URL}
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
