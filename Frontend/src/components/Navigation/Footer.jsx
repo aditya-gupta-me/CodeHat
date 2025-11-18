@@ -232,11 +232,7 @@ function Footer() {
           {/* Copyright and tech stack */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-sm text-gray-500 dark:text-gray-400 order-2 sm:order-1">
-              © 2025{" "}
-              <a href="#" className="hover:underline font-medium">
-                CodeHat™
-              </a>
-              . All Rights Reserved.
+              © 2025 CodeHat™. All Rights Reserved.
             </span>
 
             {/* Tech stack badge */}
