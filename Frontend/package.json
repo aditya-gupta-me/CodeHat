@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
+    "@codemirror/lang-java": "^6.0.2",
     "@codemirror/lang-python": "^6.2.1",
     "@codemirror/state": "^6.5.2",
     "@codemirror/theme-one-dark": "^6.1.3",

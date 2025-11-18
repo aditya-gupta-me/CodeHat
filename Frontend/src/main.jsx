@@ -27,6 +27,7 @@ import AboutUs from "./pages/AboutUs";
 
 import { useAuthPersistence } from "./hooks/useAuthPersistence";
 import { detectFreshBrowserSession } from "./utils/sessionUtils";
+import JavaCompiler from "./pages/Coding/JavaCompiler";
 
 // Create a wrapper component for auth logic
 export const AppWithAuth = () => {
@@ -56,6 +57,7 @@ export const AppWithAuth = () => {
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/updateprofile" element={<EditProfile />} />
         <Route path="/pythoncompiler" element={<PythonCompiler />} />
+        <Route path="/javacompiler" element={<JavaCompiler />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/solve/:id" element={<ProblemSolver />} />
         <Route path="/solve/:id/solution" element={<ProblemSolution />} />
