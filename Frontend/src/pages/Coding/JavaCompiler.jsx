@@ -12,20 +12,27 @@ import DisplayQuotes from "../../components/LoadingScreen/DisplayQuotes";
 import { auth } from "../../Firebase";
 
 // Helper function to extract a cleaner error message
-function extractRelevantOutput(rawOutput) {
-  if (!rawOutput) return "";
-  if (rawOutput.includes("Traceback (most recent call last):")) {
-    return rawOutput
-      .split("\n")
-      .filter((line) => line.trim() !== "")
-      .pop();
-  }
-  return rawOutput.trim();
-}
+// function extractRelevantOutput(rawOutput) {
+//   if (!rawOutput) return "";
+//   if (rawOutput.includes("Traceback (most recent call last):")) {
+//     return rawOutput
+//       .split("\n")
+//       .filter((line) => line.trim() !== "")
+//       .pop();
+//   }
+//   return rawOutput.trim();
+// }
 
 function JavaCompiler() {
-  const initialCode =
-    "# Welcome to your Java sandbox!\n# Write your code and click 'Run Code' to see the magic.\n\nprint('Hello, professional coder!')";
+  const initialCode = `// Welcome to your Java sandbox!
+// Write your code and click 'Run Code' to see the magic.
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello from Java!");
+    }
+}
+`;
 
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState("");
@@ -75,22 +82,32 @@ function JavaCompiler() {
       return;
     }
     setIsSubmitting(true);
-    setOutput("Running code...");
+    setOutput("Compiling and running Java code...");
     try {
       // Filter out empty inputs
       const nonEmptyInputs = inputs.filter((input) => input.trim() !== "");
 
-      const { data } = await axios.post(`${backend_api}/py`, {
+      // Change endpoint from /py to /execute/java
+      const { data } = await axios.post(`${backend_api}/execute/java`, {
         code,
-        inputs: nonEmptyInputs,
+        inputs: nonEmptyInputs, // Optional: if you plan to handle Scanner inputs
       });
-      const cleanOutput = extractRelevantOutput(data.passOrFail);
-      setOutput(cleanOutput);
+
+      // Java execution result structure
+      if (data.success) {
+        setOutput(data.output || "Code executed successfully with no output.");
+      } else {
+        setOutput(`Error:\n${data.error}`);
+      }
     } catch (error) {
       console.error("Error occurred:", error);
-      setOutput(
-        "Error: Could not connect to the server. Please try again later."
-      );
+      if (error.response?.data?.error) {
+        setOutput(`Error: ${error.response.data.error}`);
+      } else {
+        setOutput(
+          "Error: Could not connect to the server. Please try again later."
+        );
+      }
     } finally {
       setIsSubmitting(false);
     }
