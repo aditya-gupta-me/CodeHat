@@ -115,14 +115,15 @@ export default function Header() {
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <span
-                                title="Coming Soon"
+                              <Link
+                                to="/javacompiler"
                                 className={classNames(
-                                  "block px-4 py-2 text-sm text-gray-400 cursor-not-allowed"
+                                  active ? "bg-gray-300" : "",
+                                  "block px-4 py-2 text-sm text-gray-800"
                                 )}
                               >
-                                Java (Coming Soon)
-                              </span>
+                                Java
+                              </Link>
                             )}
                           </Menu.Item>
                           <Menu.Item>
@@ -192,7 +193,14 @@ export default function Header() {
                         {user ? (
                           <>
                             <span className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-700 truncate max-w-[12rem] transition-colors duration-150">
-                            <span role="img" aria-label="Hat" className="mr-1">🎩</span> Welcome, {user}
+                              <span
+                                role="img"
+                                aria-label="Hat"
+                                className="mr-1"
+                              >
+                                🎩
+                              </span>{" "}
+                              Welcome, {user}
                             </span>
 
                             <Link
@@ -216,32 +224,32 @@ export default function Header() {
                             </Link>
 
                             <button
-                            onClick={() => auth.signOut()}
-                            className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700 flex items-center gap-2 transition-colors duration-150">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              viewBox="0 0 24 24">
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 002 2h3a2 2 0 002-2V7a2 2 0 00-2-2h-3a2 2 0 00-2 2v1"
-                              />
-                            </svg>
-                            Logout
-                          </button>
-
+                              onClick={() => auth.signOut()}
+                              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700 flex items-center gap-2 transition-colors duration-150"
+                            >
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 002 2h3a2 2 0 002-2V7a2 2 0 00-2-2h-3a2 2 0 00-2 2v1"
+                                />
+                              </svg>
+                              Logout
+                            </button>
                           </>
                         ) : (
                           <Link
-  to="/login"
-  className="w-full block text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black rounded-md transition-colors duration-150"
->
-  Login
-</Link>
-
+                            to="/login"
+                            className="w-full block text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black rounded-md transition-colors duration-150"
+                          >
+                            Login
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>
@@ -301,14 +309,15 @@ export default function Header() {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <span
-                          title="Coming Soon"
+                        <Link
+                          to="/javacompiler"
                           className={classNames(
-                            "block px-4 py-2 text-sm text-gray-400 cursor-not-allowed"
+                            active ? "bg-gray-300" : "",
+                            "block px-4 py-2 text-sm text-gray-800"
                           )}
                         >
-                          Java (Coming Soon)
-                        </span>
+                          Java
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
