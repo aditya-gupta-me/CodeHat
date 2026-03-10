@@ -1,68 +1,47 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import { Link } from "react-router-dom";
-import { auth } from "../../Firebase";
+import { useAuth } from "../../context/AuthContext";
 import NoLoginError from "../../errors/NoLoginError";
-import { css } from "@emotion/react";
 import { ScaleLoader } from "react-spinners";
 import DisplayQuotes from "../../components/LoadingScreen/DisplayQuotes";
 
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
-
 function PracticePage() {
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [problems, setProblems] = useState([]);
   const backend_api = import.meta.env.VITE_BACKEND_API;
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      if (authUser) {
-        setUser(authUser);
-        await fetchProblems();
-      } else {
-        setUser(null);
-      }
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
-    });
-
-    return () => unsubscribe();
-  }, []);
+    if (user) {
+      fetchProblems().finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
+    }
+  }, [user]);
 
   const fetchProblems = async () => {
     try {
       const response = await fetch(`${backend_api}/api/problems`);
       const data = await response.json();
       setProblems(data);
-    } catch (error) {
-      console.error("Error fetching problems:", error);
+    } catch {
+      // Error fetching problems - will show empty list
     }
   };
 
   return (
-    <>
-      <div className="min-h-screen flex flex-col">
-        <Header />
-
-        <main className="flex-grow">
-          {isLoading ? (
-            <div className="flex justify-center items-center h-screen">
-              <ScaleLoader
-                css={override}
-                size={100}
-                color={"#123abc"}
-                loading={isLoading}
-              />
-              <DisplayQuotes />
-            </div>
-          ) : user ? (
+    <div>
+      {
+        isLoading ? (
+          <div className="flex justify-center items-center h-screen">
+            <ScaleLoader
+              size={100}
+              color="#123abc"
+              loading={isLoading}
+            />
+            <DisplayQuotes />
+          </div>
+        ) : user ? (
             <div className="container mx-auto p-4">
               <div className="overflow-x-auto">
                 <div className="py-2">
@@ -152,12 +131,9 @@ function PracticePage() {
             </div>
           ) : (
             <NoLoginError />
-          )}
-        </main>
-
-        <Footer />
-      </div>
-    </>
+          )
+      }
+    </div>
   );
 }
 

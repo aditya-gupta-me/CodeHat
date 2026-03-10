@@ -1,7 +1,5 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import Alert from "../../components/UI/Alert";
 import {
   createUserWithEmailAndPassword,
@@ -275,9 +273,7 @@ const RegistrationPage = () => {
 
   return (
     <>
-      <Header />
-
-      {/* Toast-style alert - doesn't affect layout */}
+{/* Toast-style alert - doesn't affect layout */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -502,8 +498,7 @@ const RegistrationPage = () => {
           </div>
         </div>
       </section>
-      <Footer />
-    </>
+</>
   );
 };
 

@@ -1,5 +1,3 @@
-import Header from "../components/Navigation/Header";
-import Footer from "../components/Navigation/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { css } from "@emotion/react";
@@ -361,8 +359,7 @@ const EditProfile = () => {
   if (!authChecked) {
     return (
       <>
-        <Header />
-        <div className="flex justify-center items-center h-screen">
+<div className="flex justify-center items-center h-screen">
           <ScaleLoader
             css={override}
             size={100}
@@ -370,8 +367,7 @@ const EditProfile = () => {
             loading={true}
           />
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
@@ -379,18 +375,15 @@ const EditProfile = () => {
   if (authChecked && !isAuthenticated) {
     return (
       <>
-        <Header />
-        <NoUserError />
-        <Footer />
-      </>
+<NoUserError />
+</>
     );
   }
 
   if (isLoading) {
     return (
       <>
-        <Header />
-        <div className="flex justify-center items-center h-screen">
+<div className="flex justify-center items-center h-screen">
           <ScaleLoader
             css={override}
             size={100}
@@ -398,15 +391,13 @@ const EditProfile = () => {
             loading={isLoading}
           />
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   return (
     <>
-      <Header />
-      <div
+<div
         className="container mx-auto p-5 bg-gray-50 dark:bg-white px-4 lg:px-16"
         style={{
           backgroundImage: "linear-gradient(to right, #38a3a5, #57cc99)",
@@ -1144,7 +1135,6 @@ const EditProfile = () => {
       </form>
     </div>
   </div>
-  <Footer />
 </>
 );
 };

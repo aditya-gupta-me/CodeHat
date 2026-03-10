@@ -1,75 +1,80 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { lazy, Suspense } from "react";
 import "./index.css";
-import App from "./App";
-import PageNotFound from "./errors/PageNotFoundError";
-import Login from "./pages/Auth/LoginPage";
-import ForgotPasswordPage from "./pages/Auth/ForgotPasswordPage";
-import ResetPasswordConfirmation from "./pages/Auth/ResetPasswordConfirmation";
-import Register from "./pages/Auth/RegistrationPage";
-import VerifyEmailPage from "./pages/Auth/VerifyEmai";
-import CreateProfile from "./user-profile/CreateProfile";
-import PracticePage from "./pages/Coding/PracticePage";
-import ParticipatePage from "./pages/Coding/ParticipatePage";
-import UserProfile from "./user-profile/UserProfile";
-import EditProfile from "./user-profile/EditProfile";
-import PythonCompiler from "./pages/Coding/PythonCompiler";
-import AdminPanel from "./admin/AdminPanel";
-import ProblemSolver from "./pages/Coding/ProblemSolver";
-import ProblemSolution from "./pages/Coding/ProblemSolution";
-import DeleteAccount from "./pages/Auth/DeleteAccount";
-import Goodbye from "./pages/Auth/Goodbye";
-import TermsOfService from "./pages/TermsOfService";
-import Vision from "./pages/Vision";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import AboutUs from "./pages/AboutUs";
+import { AuthProvider } from "./context/AuthContext";
+import Layout from "./components/Layout/Layout";
+import { ScaleLoader } from "react-spinners";
 
-import { useAuthPersistence } from "./hooks/useAuthPersistence";
-import { detectFreshBrowserSession } from "./utils/sessionUtils";
-import JavaCompiler from "./pages/Coding/JavaCompiler";
+// Lazy-loaded route components
+const LandingPage = lazy(() => import("./pages/LandingPage"));
+const PageNotFound = lazy(() => import("./errors/PageNotFoundError"));
+const Login = lazy(() => import("./pages/Auth/LoginPage"));
+const ForgotPasswordPage = lazy(() => import("./pages/Auth/ForgotPasswordPage"));
+const ResetPasswordConfirmation = lazy(() => import("./pages/Auth/ResetPasswordConfirmation"));
+const Register = lazy(() => import("./pages/Auth/RegistrationPage"));
+const VerifyEmailPage = lazy(() => import("./pages/Auth/VerifyEmail"));
+const CreateProfile = lazy(() => import("./user-profile/CreateProfile"));
+const PracticePage = lazy(() => import("./pages/Coding/PracticePage"));
+const ParticipatePage = lazy(() => import("./pages/Coding/ParticipatePage"));
+const UserProfile = lazy(() => import("./user-profile/UserProfile"));
+const EditProfile = lazy(() => import("./user-profile/EditProfile"));
+const PythonCompiler = lazy(() => import("./pages/Coding/PythonCompiler"));
+const JavaCompiler = lazy(() => import("./pages/Coding/JavaCompiler"));
+const AdminPanel = lazy(() => import("./admin/AdminPanel"));
+const ProblemSolver = lazy(() => import("./pages/Coding/ProblemSolver"));
+const ProblemSolution = lazy(() => import("./pages/Coding/ProblemSolution"));
+const DeleteAccount = lazy(() => import("./pages/Auth/DeleteAccount"));
+const Goodbye = lazy(() => import("./pages/Auth/Goodbye"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+const Vision = lazy(() => import("./pages/Vision"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
 
-// Create a wrapper component for auth logic
-export const AppWithAuth = () => {
-  useAuthPersistence();
-
-  useEffect(() => {
-    // Detect fresh browser session only once when app starts
-    detectFreshBrowserSession();
-  }, []);
-
+function LoadingFallback() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="*" element={<PageNotFound />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route
-          path="/reset-password-confirmation"
-          element={<ResetPasswordConfirmation />}
-        />
-        <Route path="/register" element={<Register />} />
-        <Route path="/verify-email" element={<VerifyEmailPage />} />
-        <Route path="/createprofile" element={<CreateProfile />} />
-        <Route path="/practice" element={<PracticePage />} />
-        <Route path="/participate" element={<ParticipatePage />} />
-        <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/updateprofile" element={<EditProfile />} />
-        <Route path="/pythoncompiler" element={<PythonCompiler />} />
-        <Route path="/javacompiler" element={<JavaCompiler />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/solve/:id" element={<ProblemSolver />} />
-        <Route path="/solve/:id/solution" element={<ProblemSolution />} />
-        <Route path="/delete-account" element={<DeleteAccount />} />
-        <Route path="/goodbye" element={<Goodbye />} />
-        <Route path="/termsofservice" element={<TermsOfService />} />
-        <Route path="/vision" element={<Vision />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/about" element={<AboutUs />} />
-      </Routes>
-    </Router>
+    <div className="flex flex-col justify-center items-center h-screen bg-slate-900">
+      <ScaleLoader color="#38bdf8" />
+    </div>
   );
-};
+}
 
-ReactDOM.createRoot(document.getElementById("root")).render(<AppWithAuth />);
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="/reset-password-confirmation" element={<ResetPasswordConfirmation />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/verify-email" element={<VerifyEmailPage />} />
+              <Route path="/createprofile" element={<CreateProfile />} />
+              <Route path="/practice" element={<PracticePage />} />
+              <Route path="/participate" element={<ParticipatePage />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/updateprofile" element={<EditProfile />} />
+              <Route path="/pythoncompiler" element={<PythonCompiler />} />
+              <Route path="/javacompiler" element={<JavaCompiler />} />
+              <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/solve/:id" element={<ProblemSolver />} />
+              <Route path="/solve/:id/solution" element={<ProblemSolution />} />
+              <Route path="/delete-account" element={<DeleteAccount />} />
+              <Route path="/goodbye" element={<Goodbye />} />
+              <Route path="/termsofservice" element={<TermsOfService />} />
+              <Route path="/vision" element={<Vision />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </Router>
+    </AuthProvider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

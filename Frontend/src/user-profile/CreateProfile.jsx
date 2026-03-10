@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "../components/Navigation/Header";
-import Footer from "../components/Navigation/Footer";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import {doc, setDoc} from "firebase/firestore";
@@ -336,8 +334,7 @@ const ProfileCreationPage = () => {
   if (isLoading) {
     return (
       <>
-        <Header />
-        <div className="flex justify-center items-center h-screen">
+<div className="flex justify-center items-center h-screen">
           <ScaleLoader
             css={override}
             size={100}
@@ -345,15 +342,13 @@ const ProfileCreationPage = () => {
             loading={isLoading}
           />
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   return (
     <>
-      <Header />
-      {user ? (
+{user ? (
         <div
           className="container mx-auto p-5 bg-gray-50 dark:bg-white px-4 lg:px-16"
           style={{
@@ -1121,8 +1116,7 @@ const ProfileCreationPage = () => {
      ) : (
        <NoUserError />
      )}
-     <Footer />
-   </>
+</>
  );
 };
 

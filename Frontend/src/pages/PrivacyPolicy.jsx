@@ -1,5 +1,3 @@
-import Header from "../components/Navigation/Header";
-import Footer from "../components/Navigation/Footer";
 
 const PrivacyPolicy = () => {
   const email = import.meta.env.VITE_EMAIL;
@@ -10,8 +8,7 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <Header />
-      <main className="bg-white min-h-screen py-16 px-6 font-inter text-gray-900">
+<main className="bg-white min-h-screen py-16 px-6 font-inter text-gray-900">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
           <h2 className="text-gray-500 font-medium text-base mb-8 italic">
@@ -115,8 +112,7 @@ const PrivacyPolicy = () => {
           </p>
         </div>
       </main>
-      <Footer />
-    </>
+</>
   );
 };
 

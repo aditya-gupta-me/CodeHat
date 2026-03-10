@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import Alert from "../../components/UI/Alert";
 
 const ResetPasswordConfirmation = () => {
@@ -84,8 +82,7 @@ const ResetPasswordConfirmation = () => {
   if (!validCode) {
     return (
       <>
-        <Header />
-        <div className="min-h-screen flex items-center justify-center">
+<div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-red-600 mb-4">Invalid Reset Link</h1>
             <p className="text-gray-600 mb-4">This password reset link is invalid or has expired.</p>
@@ -97,16 +94,13 @@ const ResetPasswordConfirmation = () => {
             </button>
           </div>
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   return (
     <>
-      <Header />
-      
-      {alert.show && (
+{alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
             type={alert.type}
@@ -175,8 +169,7 @@ const ResetPasswordConfirmation = () => {
           </div>
         </div>
       </section>
-      <Footer />
-    </>
+</>
   );
 };
 

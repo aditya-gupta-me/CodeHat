@@ -1,12 +1,9 @@
-import Header from "../components/Navigation/Header";
-import Footer from "../components/Navigation/Footer";
 import { Link } from "react-router-dom";
 
 function PageNotFoundError() {
   return (
     <>
-      <Header />
-      <div className="min-h-screen flex flex-col">
+<div className="min-h-screen flex flex-col">
         {/* Main content container */}
         <div className="flex-grow flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
           <div className="max-w-6xl w-full">
@@ -56,8 +53,7 @@ function PageNotFoundError() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+</>
   );
 }
 

@@ -2,9 +2,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { auth, db } from "../../Firebase"; // <-- ADDED db import
-import { doc, getDoc } from "firebase/firestore"; // <-- ADDED Firestore functions
+import { useAuth } from "../../context/AuthContext";
 
 const navigation = [
   { name: "Home", to: "/" },
@@ -15,31 +13,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function Header() {
-  const [user, setUser] = useState(null);
+  const { user, username, signOut: handleSignOut } = useAuth();
   const location = useLocation();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        try {
-          const docRef = doc(db, "users", user.uid);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            setUser(docSnap.data().username || user.email);
-          } else {
-            setUser(user.email);
-          }
-        } catch (err) {
-          console.error("Failed to fetch username:", err);
-          setUser(user.email);
-        }
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -200,7 +176,7 @@ export default function Header() {
                               >
                                 🎩
                               </span>{" "}
-                              Welcome, {user}
+                              Welcome, {username}
                             </span>
 
                             <Link
@@ -224,7 +200,7 @@ export default function Header() {
                             </Link>
 
                             <button
-                              onClick={() => auth.signOut()}
+                              onClick={handleSignOut}
                               className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700 flex items-center gap-2 transition-colors duration-150"
                             >
                               <svg
@@ -280,7 +256,7 @@ export default function Header() {
                   <Menu.Button className="flex">
                     <span className="sr-only">Open user menu</span>
                     <span className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium">
-                      Online Compliers
+                      Online Compilers
                     </span>
                   </Menu.Button>
                 </div>

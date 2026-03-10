@@ -1,5 +1,3 @@
-import Header from "../components/Navigation/Header";
-import Footer from "../components/Navigation/Footer";
 import { useState, useEffect } from "react";
 import { auth } from "../Firebase";
 import ReactMarkdown from "react-markdown";
@@ -234,23 +232,20 @@ function AdminPanel() {
   if (loading) {
     return (
       <>
-        <Header />
-        <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+<div className="min-h-screen bg-gray-50 flex justify-center items-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading...</p>
           </div>
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   if (!user || !isAdmin) {
     return (
       <>
-        <Header />
-        <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+<div className="min-h-screen bg-gray-50 flex justify-center items-center">
           <div className="text-center bg-white p-8 rounded-lg shadow-md">
             <div className="text-red-500 mb-4">
               <svg
@@ -275,15 +270,13 @@ function AdminPanel() {
             </p>
           </div>
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen bg-gray-50 py-8">
+<div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="mb-8">
@@ -853,8 +846,7 @@ function AdminPanel() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+</>
   );
 }
 

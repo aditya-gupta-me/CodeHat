@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Navigation/Header";
-import Footer from "../components/Navigation/Footer";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
@@ -206,8 +204,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Header />
-      {isLoading ? (
+{isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <ScaleLoader
             cssOverride={override}
@@ -705,8 +702,7 @@ const ProfilePage = () => {
      ) : (
        <NoUserError />
      )}
-     <Footer />
-   </>
+</>
  );
 };
 

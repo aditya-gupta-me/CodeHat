@@ -5,8 +5,6 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import { auth } from "../../Firebase"; // Add this import
 import NoLoginError from "../../errors/NoLoginError"; // Add this import
 import { css } from "@emotion/react"; // Add this import
@@ -104,8 +102,7 @@ function ProblemSolution() {
   if (isLoadingAuth) {
     return (
       <>
-        <Header />
-        <div className="min-h-screen flex flex-col">
+<div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             <div className="flex justify-center items-center h-screen">
               <ScaleLoader
@@ -118,8 +115,7 @@ function ProblemSolution() {
             </div>
           </main>
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
@@ -127,33 +123,28 @@ function ProblemSolution() {
   if (!user) {
     return (
       <>
-        <Header />
-        <NoLoginError />
-        <Footer />
-      </>
+<NoLoginError />
+</>
     );
   }
 
   if (loading) {
     return (
       <>
-        <Header />
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+<div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
             <p className="text-gray-600 font-medium">Loading solution...</p>
           </div>
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   if (error) {
     return (
       <>
-        <Header />
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+<div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center bg-white p-8 rounded-xl shadow-lg max-w-md">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -174,15 +165,13 @@ function ProblemSolution() {
             <p className="text-gray-600">{error}</p>
           </div>
         </div>
-        <Footer />
-      </>
+</>
     );
   }
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen bg-gray-50">
+<div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-160px)]">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden">
@@ -279,8 +268,7 @@ function ProblemSolution() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+</>
   );
 }
 

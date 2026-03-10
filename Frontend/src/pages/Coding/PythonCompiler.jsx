@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import { saveAs } from "file-saver";
-import copy from "copy-to-clipboard";
 import { ScaleLoader } from "react-spinners";
 
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import PythonEditor from "../../components/CodeEditor/PythonEditor";
 import NoLoginError from "../../errors/NoLoginError";
 import DisplayQuotes from "../../components/LoadingScreen/DisplayQuotes";
-import { auth } from "../../Firebase";
+import { useAuth } from "../../context/AuthContext";
 
 // Helper function to extract a cleaner error message
 function extractRelevantOutput(rawOutput) {
@@ -30,19 +27,10 @@ function PythonCompiler() {
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState("");
   const [inputs, setInputs] = useState([""]);
-  const [user, setUser] = useState(null);
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const { user, loading: isAuthenticating } = useAuth();
   const backend_api = import.meta.env.VITE_BACKEND_API;
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      setUser(authUser || null);
-      setIsAuthenticating(false);
-    });
-    return () => unsubscribe();
-  }, []);
 
   const handleCodeChange = useCallback((newCode) => {
     setCode(newCode);
@@ -96,10 +84,13 @@ function PythonCompiler() {
     }
   };
 
-  const copyOutputToClipboard = () => {
+  const copyOutputToClipboard = async () => {
     if (!output) return;
-    copy(output);
-    alert("Output copied to clipboard!");
+    try {
+      await navigator.clipboard.writeText(output);
+    } catch {
+      // Fallback: silently fail
+    }
   };
 
   const downloadOutput = () => {
@@ -109,13 +100,14 @@ function PythonCompiler() {
   };
 
   if (!user) {
+    return <NoLoginError />;
+  }
+
+  if (isAuthenticating) {
     return (
-      <div className="flex flex-col min-h-screen bg-slate-900">
-        <Header />
-        <main className="flex-grow">
-          <NoLoginError />
-        </main>
-        <Footer />
+      <div className="flex flex-col justify-center items-center h-screen bg-slate-900">
+        <ScaleLoader color="#38bdf8" loading={isAuthenticating} />
+        <DisplayQuotes />
       </div>
     );
   }
@@ -130,9 +122,8 @@ function PythonCompiler() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-900 font-sans">
-      <Header />
-      <main className="flex-grow container mx-auto p-4 md:p-6 lg:p-8">
+    <div className="bg-slate-900 font-sans">
+      <div className="container mx-auto p-4 md:p-6 lg:p-8">
         {/* Top Action Bar */}
         <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
           <h1 className="text-2xl font-bold text-slate-100">Python Playground</h1>
@@ -302,8 +293,7 @@ function PythonCompiler() {
             </div>
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
     </div>
   );
 }

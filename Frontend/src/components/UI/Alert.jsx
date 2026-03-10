@@ -1,5 +1,4 @@
-// Alert.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
@@ -8,7 +7,10 @@ import {
   faTimesCircle,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import classNames from "classnames";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const Alert = ({
   type = "info",

@@ -2,8 +2,6 @@ import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { Link } from "react-router-dom";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import Alert from "../../components/UI/Alert";
 
 const ForgotPasswordPage = () => {
@@ -87,9 +85,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-      <Header />
-
-      {/* Toast-style alert */}
+{/* Toast-style alert */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -222,8 +218,7 @@ const ForgotPasswordPage = () => {
           </div>
         </div>
       </section>
-      <Footer />
-    </>
+</>
   );
 };
 

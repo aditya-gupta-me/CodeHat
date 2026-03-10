@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 
 const Goodbye = () => {
   const [countdown, setCountdown] = useState(5);
@@ -37,8 +35,7 @@ const Goodbye = () => {
 
   return (
     <>
-      <Header />
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+<main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-3xl mx-auto text-center bg-white rounded-xl shadow-md p-6 md:p-10">
           <h1 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">
             Goodbye 👋
@@ -89,8 +86,7 @@ const Goodbye = () => {
           </div>
         </div>
       </main>
-      <Footer />
-    </>
+</>
   );
 };
 

@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import { auth, db } from "../../Firebase"; // Import db
 import { doc, deleteDoc } from "firebase/firestore"; // Import Firestore functions
 import { useNavigate } from "react-router-dom";
@@ -116,8 +114,7 @@ const DeleteAccount = () => {
   if (loadingUser) {
     return (
       <>
-        <Header />
-        <main className="min-h-screen flex justify-center items-center">
+<main className="min-h-screen flex justify-center items-center">
           <ScaleLoader
             cssOverride={override}
             size={100}
@@ -125,26 +122,21 @@ const DeleteAccount = () => {
             loading={loadingUser}
           />
         </main>
-        <Footer />
-      </>
+</>
     );
   }
 
   if (!user && !redirectingRef.current) {
     return (
       <>
-        <Header />
-        <NoUserError />
-        <Footer />
-      </>
+<NoUserError />
+</>
     );
   }
 
   return (
     <>
-      <Header />
-
-      {/* Toast-style alert - doesn't affect layout */}
+{/* Toast-style alert - doesn't affect layout */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -223,8 +215,7 @@ const DeleteAccount = () => {
           )}
         </div>
       </main>
-      <Footer />
-    </>
+</>
   );
 };
 

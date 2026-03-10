@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 
 const VerifyEmailPage = () => {
   const navigate = useNavigate();
@@ -16,8 +14,7 @@ const VerifyEmailPage = () => {
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-800">
+<div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-800">
         <h1 className="text-2xl font-bold mb-4">Verify Your Email</h1>
         <p className="text-center max-w-md">
           We’ve sent a verification link to your email. Please check your inbox
@@ -30,8 +27,7 @@ const VerifyEmailPage = () => {
           Redirecting to login in 5 seconds...
         </p>
       </div>
-      <Footer />
-    </>
+</>
   );
 };
 

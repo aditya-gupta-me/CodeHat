@@ -1,6 +1,4 @@
 import { useRef, useState } from "react";
-import Header from "../../components/Navigation/Header";
-import Footer from "../../components/Navigation/Footer";
 import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence } from "firebase/auth";
 import { auth } from "../../Firebase";
@@ -151,9 +149,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Header />
-
-      {/* Toast-style alert - doesn't affect layout */}
+{/* Toast-style alert - doesn't affect layout */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -325,8 +321,7 @@ const LoginPage = () => {
           </div>
         </div>
       </section>
-      <Footer />
-    </>
+</>
   );
 };
 
