@@ -23,18 +23,26 @@ _This is how CodeHat code editor looks._
 
 - **High-Performance Editor**: A lightweight and optimized code editor built with CodeMirror, designed to be faster and more responsive than many conventional online editors.
 - **Custom Input Handling**: Easily provide standard input (`stdin`) to your programs to test various edge cases and scenarios.
-- **Initial Language Support**: Currently optimized for Python, with a clear roadmap to include more languages.
+- **Multi-Language Support**: Python and Java execution environments with a clear roadmap for more languages.
+- **User Authentication**: Firebase-powered authentication with email verification, password reset, and "remember me" sessions.
+- **Practice Problems**: Browse and solve coding problems with difficulty ratings and solution availability indicators.
 - **Open Source Frontend**: The entire user-facing interface is open source (MIT License), welcoming community contributions and ensuring transparency in its development.
 
 ## 🚀 Getting Started
 
-To get the CodeHat frontend running on your local machine for development or contributions, follow these steps:
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm v9 or higher
+- A Firebase project (for authentication and Firestore)
+
+### Setup
 
 1.  **Clone the repository:**
 
     ```sh
-    git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git
-    cd YOUR_REPOSITORY_NAME
+    git clone https://github.com/the-adee/CodeHat.git
+    cd CodeHat/Frontend
     ```
 
 2.  **Install dependencies:**
@@ -43,26 +51,74 @@ To get the CodeHat frontend running on your local machine for development or con
     npm install
     ```
 
-3.  **Run the development server:**
+3.  **Configure environment variables:**
+
     ```sh
-    npm start
+    cp .env.example .env
     ```
-    The application will be available at `http://localhost:3000`.
+
+    Edit `.env` and fill in your Firebase config values and other required variables. See `.env.example` for documentation on each variable.
+
+4.  **Run the development server:**
+
+    ```sh
+    npm run dev
+    ```
+
+    The application will be available at `http://localhost:5173`.
+
+### Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run tests (Vitest) |
+| `npm run test:watch` | Run tests in watch mode |
 
 ## 🛠️ Technology Stack
 
-- **Frontend:** React.js
-- **Code Editor:** CodeMirror
-- **Styling:** Tailwind CSS
+| Category | Technology |
+|---|---|
+| **Framework** | React 19 |
+| **Build Tool** | Vite 7 |
+| **Code Editor** | CodeMirror 6 |
+| **Styling** | Tailwind CSS 3 |
+| **Authentication** | Firebase Auth |
+| **Database** | Cloud Firestore |
+| **Testing** | Vitest + React Testing Library |
+| **Deployment** | Vercel |
+
+## 📁 Project Structure
+
+```
+Frontend/src/
+├── admin/           # Admin panel components
+├── auth/            # Auth guards and route protection
+├── components/      # Reusable UI components
+│   ├── CodeEditor/  # CodeMirror editor wrappers
+│   ├── Layout/      # Shared page layout (Header + Footer)
+│   ├── LoadingScreen/
+│   ├── Navigation/  # Header and Footer
+│   └── UI/          # Generic UI components (Alert, etc.)
+├── context/         # React Context providers (AuthContext)
+├── errors/          # Error page components
+├── hooks/           # Custom React hooks
+├── pages/           # Route-level page components
+│   ├── Auth/        # Login, Register, Password Reset, etc.
+│   └── Coding/      # Compilers, Practice, Problem Solver
+├── user-profile/    # User profile management
+└── utils/           # Utility functions
+```
 
 ## 🗺️ Roadmap
 
-We are actively working to evolve CodeHat into a full-fledged platform. Our current focus is on building a robust and secure multi-language backend.
-
-- [ ] **Containerized Backend**: Implementing Docker to create isolated and secure execution environments for user code.
-- [ ] **Multi-Language Support**: Expanding beyond Python to include JavaScript, C++, Java, and Go.
-- [ ] **User Accounts**: Allowing users to save their code snippets and history.
-- [ ] **UI/UX Enhancements**: Continuously improving the user interface.
+- [ ] **Containerized Backend**: Docker-based isolated execution environments for user code.
+- [ ] **Multi-Language Support**: Expanding to include JavaScript, C++, and Go.
+- [ ] **Code Snippet History**: Allowing users to save and revisit past code sessions.
+- [ ] **UI/UX Enhancements**: Continued improvements to the interface and user experience.
 - [ ] **Backend Source**: Considering open-sourcing the backend in the future.
 
 ## 🤝 How to Contribute
