@@ -1,10 +1,74 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import TerminalDemo from "../components/Home/TerminalDemo";
 import AiChallengeCard from "../components/Home/AiChallengeCard";
 
+// Format large numbers into readable format (1234 -> 1.2K)
+const formatNumber = (num) => {
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
+  if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+  return num.toString();
+};
+
 function LandingPage() {
   const { user } = useAuth();
+  const API_URL = import.meta.env.VITE_BACKEND_API;
+
+  const [visitorCount, setVisitorCount] = useState(null);
+  const [codeExecutionCount, setCodeExecutionCount] = useState(null);
+  const [statsLoading, setStatsLoading] = useState(true);
+
+  // Track visitor and fetch platform stats
+  useEffect(() => {
+    const trackAndFetchStats = async () => {
+      try {
+        // Generate or retrieve unique visitor ID from localStorage
+        let visitorId = localStorage.getItem("visitorId");
+        if (!visitorId) {
+          visitorId = `visitor_${Date.now()}_${Math.random()
+            .toString(36)
+            .substr(2, 9)}`;
+          localStorage.setItem("visitorId", visitorId);
+        }
+
+        // Track this visitor
+        await axios.post(`${API_URL}/api/track-visitor`, { visitorId });
+
+        // Fetch both counts in parallel
+        const [visitorRes, executionRes] = await Promise.all([
+          axios.get(`${API_URL}/api/visitor-count`),
+          axios.get(`${API_URL}/api/code-execution-count`),
+        ]);
+
+        setVisitorCount(visitorRes.data.count);
+        setCodeExecutionCount(executionRes.data.linesExecuted);
+      } catch (error) {
+        console.error("Error fetching platform stats:", error);
+      } finally {
+        setStatsLoading(false);
+      }
+    };
+
+    trackAndFetchStats();
+
+    // Auto-refresh counts every 30 seconds
+    const interval = setInterval(async () => {
+      try {
+        const [visitorRes, executionRes] = await Promise.all([
+          axios.get(`${API_URL}/api/visitor-count`),
+          axios.get(`${API_URL}/api/code-execution-count`),
+        ]);
+        setVisitorCount(visitorRes.data.count);
+        setCodeExecutionCount(executionRes.data.linesExecuted);
+      } catch {
+        // Silently fail on refresh
+      }
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [API_URL]);
 
   return (
     <div className="min-h-screen bg-ch-dark">
@@ -64,7 +128,16 @@ function LandingPage() {
         <div className="flex flex-wrap gap-12 lg:gap-16">
           <StatItem value="20+" label="languages" />
           <StatItem value="AI" label="question gen" />
-          <StatItem value="∞" label="unique problems" />
+          <StatItem
+            value={statsLoading ? null : formatNumber(visitorCount || 0)}
+            label="visitors"
+            loading={statsLoading}
+          />
+          <StatItem
+            value={statsLoading ? null : formatNumber(codeExecutionCount || 0)}
+            label="lines executed"
+            loading={statsLoading}
+          />
         </div>
       </section>
 
@@ -102,10 +175,16 @@ function LandingPage() {
 /**
  * Stat item shown in the stats row.
  */
-function StatItem({ value, label }) {
+function StatItem({ value, label, loading }) {
   return (
     <div>
-      <div className="font-display text-3xl font-bold text-ch-text">{value}</div>
+      <div className="font-display text-3xl font-bold text-ch-text">
+        {loading ? (
+          <span className="inline-block w-16 h-8 bg-ch-surface-raised rounded animate-pulse" />
+        ) : (
+          value
+        )}
+      </div>
       <div className="font-code text-sm text-ch-muted mt-1">{label}</div>
     </div>
   );

@@ -8,7 +8,11 @@ const navigation = [
   { name: "Home", to: "/" },
   { name: "Practice", to: "/practice" },
   { name: "Compete", to: "/participate" },
-  { name: "Compiler", to: "/compiler/python" },
+];
+
+const compilerLinks = [
+  { name: "Python", to: "/pythoncompiler" },
+  { name: "Java", to: "/javacompiler" },
 ];
 
 function classNames(...classes) {
@@ -63,7 +67,7 @@ export default function Header() {
 
                 {/* Desktop nav */}
                 <div className="hidden sm:ml-10 sm:block">
-                  <div className="flex space-x-1">
+                  <div className="flex items-center space-x-1">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
@@ -79,6 +83,54 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))}
+
+                    {/* Compiler dropdown */}
+                    <Menu as="div" className="relative">
+                      <Menu.Button
+                        className={classNames(
+                          location.pathname.includes("compiler")
+                            ? "text-ch-accent"
+                            : "text-ch-muted hover:text-ch-text",
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 inline-flex items-center gap-1"
+                        )}
+                      >
+                        Compiler
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </Menu.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-lg bg-ch-surface border border-ch-border py-1 shadow-xl shadow-black/30 focus:outline-none">
+                          {compilerLinks.map((lang) => (
+                            <Menu.Item key={lang.name}>
+                              {({ active }) => (
+                                <Link
+                                  to={lang.to}
+                                  className={classNames(
+                                    location.pathname === lang.to
+                                      ? "text-ch-accent bg-ch-surface-raised"
+                                      : active
+                                        ? "text-ch-text bg-ch-surface-raised"
+                                        : "text-ch-muted",
+                                    "block px-4 py-2 text-sm transition-colors"
+                                  )}
+                                >
+                                  {lang.name}
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
                   </div>
                 </div>
               </div>
@@ -191,6 +243,27 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
+
+              {/* Compiler sub-links in mobile */}
+              <div className="pt-1">
+                <span className="block px-3 py-2 text-xs font-code uppercase tracking-wider text-ch-muted/60">
+                  Compiler
+                </span>
+                {compilerLinks.map((lang) => (
+                  <Link
+                    key={lang.name}
+                    to={lang.to}
+                    className={classNames(
+                      location.pathname === lang.to
+                        ? "text-ch-accent bg-ch-surface"
+                        : "text-ch-muted hover:text-ch-text hover:bg-ch-surface",
+                      "block rounded-md px-3 pl-6 py-2 text-sm font-medium transition-colors"
+                    )}
+                  >
+                    {lang.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </Disclosure.Panel>
         </>
