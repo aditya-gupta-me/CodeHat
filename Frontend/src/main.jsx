@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import "./index.css";
 import { AuthProvider } from "./context/AuthContext";
@@ -19,8 +19,7 @@ const PracticePage = lazy(() => import("./pages/Coding/PracticePage"));
 const ParticipatePage = lazy(() => import("./pages/Coding/ParticipatePage"));
 const UserProfile = lazy(() => import("./user-profile/UserProfile"));
 const EditProfile = lazy(() => import("./user-profile/EditProfile"));
-const PythonCompiler = lazy(() => import("./pages/Coding/PythonCompiler"));
-const JavaCompiler = lazy(() => import("./pages/Coding/JavaCompiler"));
+const Compiler = lazy(() => import("./pages/Coding/Compiler"));
 const AdminPanel = lazy(() => import("./admin/AdminPanel"));
 const ProblemSolver = lazy(() => import("./pages/Coding/ProblemSolver"));
 const ProblemSolution = lazy(() => import("./pages/Coding/ProblemSolution"));
@@ -57,8 +56,10 @@ function App() {
               <Route path="/participate" element={<ParticipatePage />} />
               <Route path="/userprofile" element={<UserProfile />} />
               <Route path="/updateprofile" element={<EditProfile />} />
-              <Route path="/pythoncompiler" element={<PythonCompiler />} />
-              <Route path="/javacompiler" element={<JavaCompiler />} />
+              <Route path="/compiler/:lang" element={<Compiler />} />
+              {/* Legacy redirects — keep old URLs working */}
+              <Route path="/pythoncompiler" element={<Navigate to="/compiler/python" replace />} />
+              <Route path="/javacompiler" element={<Navigate to="/compiler/java" replace />} />
               <Route path="/admin" element={<AdminPanel />} />
               <Route path="/solve/:id" element={<ProblemSolver />} />
               <Route path="/solve/:id/solution" element={<ProblemSolution />} />

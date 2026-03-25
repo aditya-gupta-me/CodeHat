@@ -79,7 +79,7 @@ export default function Header() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                to="/pythoncompiler"
+                                to="/compiler/python"
                                 className={classNames(
                                   active ? "bg-gray-300" : "",
                                   "block px-4 py-2 text-sm text-gray-800"
@@ -92,7 +92,7 @@ export default function Header() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                to="/javacompiler"
+                                to="/compiler/java"
                                 className={classNames(
                                   active ? "bg-gray-300" : "",
                                   "block px-4 py-2 text-sm text-gray-800"
@@ -273,7 +273,7 @@ export default function Header() {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          to="/pythoncompiler"
+                          to="/compiler/python"
                           className={classNames(
                             active ? "bg-gray-300" : "",
                             "block px-4 py-2 text-sm text-gray-800"
@@ -286,7 +286,7 @@ export default function Header() {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          to="/javacompiler"
+                          to="/compiler/java"
                           className={classNames(
                             active ? "bg-gray-300" : "",
                             "block px-4 py-2 text-sm text-gray-800"
