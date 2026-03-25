@@ -14,9 +14,7 @@ vi.mock("react-spinners", () => ({
 }));
 
 // Import after mocks are set up
-const { default: ProtectedRoute } = await import(
-  "../../auth/ProtectedRoute"
-);
+const { default: ProtectedRoute } = await import("../../auth/ProtectedRoute");
 
 function renderProtected(initialRoute = "/protected") {
   return render(

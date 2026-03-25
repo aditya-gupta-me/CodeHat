@@ -16,7 +16,6 @@ export default function Header() {
   const { user, username, signOut: handleSignOut } = useAuth();
   const location = useLocation();
 
-
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -169,11 +168,7 @@ export default function Header() {
                         {user ? (
                           <>
                             <span className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-700 truncate max-w-[12rem] transition-colors duration-150">
-                              <span
-                                role="img"
-                                aria-label="Hat"
-                                className="mr-1"
-                              >
+                              <span role="img" aria-label="Hat" className="mr-1">
                                 🎩
                               </span>{" "}
                               Welcome, {username}

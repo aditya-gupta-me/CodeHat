@@ -125,10 +125,7 @@ const ProfilePage = () => {
     doc.text("Experience", 10, y);
     y += 7;
 
-    if (
-      Array.isArray(profileData.C_Experience) &&
-      profileData.C_Experience.length > 0
-    ) {
+    if (Array.isArray(profileData.C_Experience) && profileData.C_Experience.length > 0) {
       profileData.C_Experience.forEach((exp) => {
         const line = `• ${exp.title} at ${exp.company} (${formatDate(
           exp.startDate
@@ -157,10 +154,7 @@ const ProfilePage = () => {
     doc.text("Education", 10, y);
     y += 7;
 
-    if (
-      Array.isArray(profileData.C_Education) &&
-      profileData.C_Education.length > 0
-    ) {
+    if (Array.isArray(profileData.C_Education) && profileData.C_Education.length > 0) {
       profileData.C_Education.forEach((edu) => {
         const line = `• ${edu.degree} at ${edu.institution} (${formatDate(
           edu.startDate
@@ -204,14 +198,9 @@ const ProfilePage = () => {
 
   return (
     <>
-{isLoading ? (
+      {isLoading ? (
         <div className="flex justify-center items-center h-screen">
-          <ScaleLoader
-            cssOverride={override}
-            size={100}
-            color={"#123abc"}
-            loading={isLoading}
-          />
+          <ScaleLoader cssOverride={override} size={100} color={"#123abc"} loading={isLoading} />
         </div>
       ) : user ? (
         <div
@@ -230,9 +219,7 @@ const ProfilePage = () => {
                   {/* Username */}
                   {userName && (
                     <div className="mb-2">
-                      <span className="text-gray-500 text-sm font-medium">
-                        @{userName}
-                      </span>
+                      <span className="text-gray-500 text-sm font-medium">@{userName}</span>
                     </div>
                   )}
 
@@ -255,14 +242,10 @@ const ProfilePage = () => {
                   {/* Account Status */}
                   <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 divide-y rounded shadow-sm">
                     <li className="flex items-center justify-between py-3">
-                      <span className="text-sm sm:text-base">
-                        Account Status
-                      </span>
+                      <span className="text-sm sm:text-base">Account Status</span>
                       {profileData && (
                         <span className="bg-green-500 py-1 px-2 rounded text-white text-xs sm:text-sm">
-                          {profileData.C_Status === true
-                            ? "Active"
-                            : "Inactive"}
+                          {profileData.C_Status === true ? "Active" : "Inactive"}
                         </span>
                       )}
                     </li>
@@ -303,8 +286,8 @@ const ProfilePage = () => {
                     {/* GitHub */}
                     <div className="text-center">
                       {profileData?.C_Github ? (
-                        
-                        <a href={ensureHttps(profileData.C_Github)}
+                        <a
+                          href={ensureHttps(profileData.C_Github)}
                           className="text-gray-700 block hover:text-gray-900 transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -314,9 +297,7 @@ const ProfilePage = () => {
                             src="https://img.icons8.com/ios-filled/500/000000/github.png"
                             alt="GitHub"
                           />
-                          <span className="text-xs sm:text-sm mt-1 block">
-                            GitHub
-                          </span>
+                          <span className="text-xs sm:text-sm mt-1 block">GitHub</span>
                         </a>
                       ) : (
                         <div
@@ -328,9 +309,7 @@ const ProfilePage = () => {
                             src="https://img.icons8.com/ios-filled/500/000000/github.png"
                             alt="GitHub"
                           />
-                          <span className="text-xs sm:text-sm mt-1 block">
-                            GitHub
-                          </span>
+                          <span className="text-xs sm:text-sm mt-1 block">GitHub</span>
                         </div>
                       )}
                     </div>
@@ -338,8 +317,8 @@ const ProfilePage = () => {
                     {/* LinkedIn */}
                     <div className="text-center">
                       {profileData?.C_LinkedIn ? (
-                        
-                        <a href={ensureHttps(profileData.C_LinkedIn)}
+                        <a
+                          href={ensureHttps(profileData.C_LinkedIn)}
                           className="text-gray-700 block hover:text-gray-900 transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -349,9 +328,7 @@ const ProfilePage = () => {
                             src="https://img.icons8.com/ios-filled/500/000000/linkedin.png"
                             alt="LinkedIn"
                           />
-                          <span className="text-xs sm:text-sm mt-1 block">
-                            LinkedIn
-                          </span>
+                          <span className="text-xs sm:text-sm mt-1 block">LinkedIn</span>
                         </a>
                       ) : (
                         <div
@@ -363,9 +340,7 @@ const ProfilePage = () => {
                             src="https://img.icons8.com/ios-filled/500/000000/linkedin.png"
                             alt="LinkedIn"
                           />
-                          <span className="text-xs sm:text-sm mt-1 block">
-                            LinkedIn
-                          </span>
+                          <span className="text-xs sm:text-sm mt-1 block">LinkedIn</span>
                         </div>
                       )}
                     </div>
@@ -373,8 +348,8 @@ const ProfilePage = () => {
                     {/* Website */}
                     <div className="text-center">
                       {profileData?.C_Website ? (
-                        
-                        <a href={ensureHttps(profileData.C_Website)}
+                        <a
+                          href={ensureHttps(profileData.C_Website)}
                           className="text-gray-700 block hover:text-gray-900 transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -384,9 +359,7 @@ const ProfilePage = () => {
                             src="https://img.icons8.com/ios-filled/500/000000/domain.png"
                             alt="Website"
                           />
-                          <span className="text-xs sm:text-sm mt-1 block">
-                            Website
-                          </span>
+                          <span className="text-xs sm:text-sm mt-1 block">Website</span>
                         </a>
                       ) : (
                         <div
@@ -398,9 +371,7 @@ const ProfilePage = () => {
                             src="https://img.icons8.com/ios-filled/500/000000/domain.png"
                             alt="Website"
                           />
-                          <span className="text-xs sm:text-sm mt-1 block">
-                            Website
-                          </span>
+                          <span className="text-xs sm:text-sm mt-1 block">Website</span>
                         </div>
                       )}
                     </div>
@@ -429,9 +400,7 @@ const ProfilePage = () => {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide text-lg sm:text-xl">
-                      About
-                    </span>
+                    <span className="tracking-wide text-lg sm:text-xl">About</span>
                   </div>
 
                   {/* Professional Summary */}
@@ -440,9 +409,7 @@ const ProfilePage = () => {
                       <h4 className="text-gray-800 font-semibold text-base mb-3">
                         Professional Summary
                       </h4>
-                      <p className="text-gray-600 text-sm leading-6">
-                        {profileData.C_Description}
-                      </p>
+                      <p className="text-gray-600 text-sm leading-6">{profileData.C_Description}</p>
                     </div>
                   )}
 
@@ -454,9 +421,7 @@ const ProfilePage = () => {
                             First Name
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
-                              {profileData.C_FName}
-                            </div>
+                            <div className="text-gray-600">{profileData.C_FName}</div>
                           )}
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center">
@@ -464,9 +429,7 @@ const ProfilePage = () => {
                             Last Name
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
-                              {profileData.C_LName}
-                            </div>
+                            <div className="text-gray-600">{profileData.C_LName}</div>
                           )}
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center">
@@ -474,9 +437,7 @@ const ProfilePage = () => {
                             Gender
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
-                              {profileData.C_Gender}
-                            </div>
+                            <div className="text-gray-600">{profileData.C_Gender}</div>
                           )}
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center">
@@ -484,9 +445,7 @@ const ProfilePage = () => {
                             Contact No.
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
-                              {profileData.C_PhoneNo}
-                            </div>
+                            <div className="text-gray-600">{profileData.C_PhoneNo}</div>
                           )}
                         </div>
                       </div>
@@ -497,9 +456,7 @@ const ProfilePage = () => {
                             Address
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
-                              {profileData.C_Address}
-                            </div>
+                            <div className="text-gray-600">{profileData.C_Address}</div>
                           )}
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center">
@@ -507,9 +464,7 @@ const ProfilePage = () => {
                             Birthday
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
-                              {formatDate(profileData.C_DOB)}
-                            </div>
+                            <div className="text-gray-600">{formatDate(profileData.C_DOB)}</div>
                           )}
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center">
@@ -518,8 +473,8 @@ const ProfilePage = () => {
                           </div>
                           {profileData && (
                             <div className="text-gray-600">
-                              
-                              <a className="text-blue-800 hover:text-blue-900 transition-colors"
+                              <a
+                                className="text-blue-800 hover:text-blue-900 transition-colors"
                                 href={`mailto:${profileData.C_Email}`}
                               >
                                 {profileData.C_Email}
@@ -541,9 +496,7 @@ const ProfilePage = () => {
                   {profileData && (
                     <div className="flex flex-col sm:flex-row justify-center gap-3 mt-6">
                       <button
-                        onClick={() =>
-                          navigate("/updateprofile", { state: profileData })
-                        }
+                        onClick={() => navigate("/updateprofile", { state: profileData })}
                         className="flex items-center justify-center text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors"
                       >
                         <svg
@@ -598,39 +551,28 @@ const ProfilePage = () => {
                             />
                           </svg>
                         </span>
-                        <span className="tracking-wide text-lg">
-                          Experience
-                        </span>
+                        <span className="tracking-wide text-lg">Experience</span>
                       </div>
                       <div className="space-y-3">
                         {profileData &&
                         profileData.C_Experience &&
                         profileData.C_Experience.length > 0 ? (
                           profileData.C_Experience.map((exp, index) => (
-                            <div
-                              key={index}
-                              className="border-l-2 border-gray-200 pl-4"
-                            >
+                            <div key={index} className="border-l-2 border-gray-200 pl-4">
                               <div className="text-teal-600 font-medium">
                                 {exp.title} at {exp.company}
                               </div>
                               <div className="text-gray-500 text-xs mb-1">
                                 {exp.startDate && formatDate(exp.startDate)} -{" "}
-                                {exp.isCurrent
-                                  ? "Present"
-                                  : exp.endDate && formatDate(exp.endDate)}
+                                {exp.isCurrent ? "Present" : exp.endDate && formatDate(exp.endDate)}
                               </div>
                               {exp.description && (
-                                <div className="text-gray-600 text-sm">
-                                  {exp.description}
-                                </div>
+                                <div className="text-gray-600 text-sm">{exp.description}</div>
                               )}
                             </div>
                           ))
                         ) : (
-                          <div className="text-gray-500 text-sm">
-                            No experience data available
-                          </div>
+                          <div className="text-gray-500 text-sm">No experience data available</div>
                         )}
                       </div>
                     </div>
@@ -666,44 +608,35 @@ const ProfilePage = () => {
                         profileData.C_Education &&
                         profileData.C_Education.length > 0 ? (
                           profileData.C_Education.map((edu, index) => (
-                            <div
-                              key={index}
-                              className="border-l-2 border-gray-200 pl-4"
-                            >
+                            <div key={index} className="border-l-2 border-gray-200 pl-4">
                               <div className="text-teal-600 font-medium">
                                 {edu.degree} from {edu.institution}
                               </div>
                               <div className="text-gray-500 text-xs mb-1">
                                 {edu.startDate && formatDate(edu.startDate)} -{" "}
-                                {edu.isOngoing
-                                  ? "Ongoing"
-                                  : edu.endDate && formatDate(edu.endDate)}
-                             </div>
-                             {edu.description && (
-                               <div className="text-gray-600 text-sm">
-                                 {edu.description}
-                               </div>
-                             )}
-                           </div>
-                         ))
-                       ) : (
-                         <div className="text-gray-500 text-sm">
-                           No education data available
-                         </div>
-                       )}
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     ) : (
-       <NoUserError />
-     )}
-</>
- );
+                                {edu.isOngoing ? "Ongoing" : edu.endDate && formatDate(edu.endDate)}
+                              </div>
+                              {edu.description && (
+                                <div className="text-gray-600 text-sm">{edu.description}</div>
+                              )}
+                            </div>
+                          ))
+                        ) : (
+                          <div className="text-gray-500 text-sm">No education data available</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <NoUserError />
+      )}
+    </>
+  );
 };
 
 export default ProfilePage;

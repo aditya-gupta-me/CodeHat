@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import { auth } from "../../Firebase";
 import ReCAPTCHA from "react-google-recaptcha";
 import Alert from "../../components/UI/Alert";
@@ -56,7 +61,7 @@ const LoginPage = () => {
 
         // Set Firebase persistence based on "Remember Me" checkbox
         const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
-        
+
         try {
           await setPersistence(auth, persistence);
         } catch (error) {
@@ -69,10 +74,7 @@ const LoginPage = () => {
             await user.reload();
 
             if (!user.emailVerified) {
-              showAlert(
-                "warning",
-                "Email not verified. Please check your inbox or spam folder."
-              );
+              showAlert("warning", "Email not verified. Please check your inbox or spam folder.");
               await auth.signOut();
               setLoading(false);
               return;
@@ -84,15 +86,15 @@ const LoginPage = () => {
               const rememberData = {
                 timestamp: Date.now(),
                 email: email,
-                rememberMe: true
+                rememberMe: true,
               };
-              localStorage.setItem('rememberMeData', JSON.stringify(rememberData));
+              localStorage.setItem("rememberMeData", JSON.stringify(rememberData));
             } else {
               // Clear any existing remember me data
-              localStorage.removeItem('rememberMeData');
-              
+              localStorage.removeItem("rememberMeData");
+
               // Set session-only flag to ensure logout on window close
-              sessionStorage.setItem('sessionOnly', 'true');
+              sessionStorage.setItem("sessionOnly", "true");
             }
 
             // ✅ GET FIREBASE TOKEN
@@ -149,7 +151,7 @@ const LoginPage = () => {
 
   return (
     <>
-{/* Toast-style alert - doesn't affect layout */}
+      {/* Toast-style alert - doesn't affect layout */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -171,8 +173,8 @@ const LoginPage = () => {
         }}
       >
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full lg:py-0">
-          
-          <a href="#"
+          <a
+            href="#"
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-black"
           >
             <span className="flex items-center text-5xl font-extrabold dark:text-white">
@@ -276,17 +278,14 @@ const LoginPage = () => {
                       />
                     </div>
                     <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="remember"
-                        className="text-black dark:text-gray-300"
-                      >
+                      <label htmlFor="remember" className="text-black dark:text-gray-300">
                         Remember me for 14 days
                       </label>
                     </div>
                   </div>
 
-                  
-                  <Link to="/forgot-password"
+                  <Link
+                    to="/forgot-password"
                     className="text-black font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
                     Forgot password?
@@ -321,7 +320,7 @@ const LoginPage = () => {
           </div>
         </div>
       </section>
-</>
+    </>
   );
 };
 

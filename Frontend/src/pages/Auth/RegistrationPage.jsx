@@ -44,7 +44,7 @@ const RegistrationPage = () => {
   // Username validation
   const validateUsername = (username) => {
     const errors = [];
-    
+
     if (username.length < 3) {
       errors.push("at least 3 characters");
     }
@@ -94,7 +94,7 @@ const RegistrationPage = () => {
         },
         body: JSON.stringify({ username }),
       });
-      
+
       const data = await response.json();
       return data.available;
     } catch (error) {
@@ -114,18 +114,14 @@ const RegistrationPage = () => {
     // Enhanced username validation
     const usernameErrors = validateUsername(username);
     if (usernameErrors.length > 0) {
-      setUsernameError(
-        `⚠️ Username must have: ${usernameErrors.join(", ")}`
-      );
+      setUsernameError(`⚠️ Username must have: ${usernameErrors.join(", ")}`);
       return;
     }
 
     // Enhanced password validation
     const passwordErrors = validatePassword(password);
     if (passwordErrors.length > 0) {
-      setPasswordError(
-        `⚠️ Password must contain: ${passwordErrors.join(", ")}`
-      );
+      setPasswordError(`⚠️ Password must contain: ${passwordErrors.join(", ")}`);
       return;
     }
 
@@ -142,7 +138,7 @@ const RegistrationPage = () => {
       // Check username availability
       showAlert("info", "Checking username availability...", false);
       const isUsernameAvailable = await checkUsernameAvailability(username);
-      
+
       if (!isUsernameAvailable) {
         setUsernameError("⚠️ This username is already taken. Please choose another.");
         setLoading(false);
@@ -189,9 +185,9 @@ const RegistrationPage = () => {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ 
-                  username, 
-                  userId: user.uid 
+                body: JSON.stringify({
+                  username,
+                  userId: user.uid,
                 }),
               });
 
@@ -212,18 +208,17 @@ const RegistrationPage = () => {
               setTimeout(() => {
                 window.location.href = "/verify-email";
               }, 3000);
-
             } catch (firestoreError) {
               console.error("Error saving user data:", firestoreError);
               // Still proceed but show warning
               showAlert(
-                "warning", 
+                "warning",
                 "Account created but some profile data couldn't be saved. Please update your profile after login."
               );
-              
+
               await sendEmailVerification(user);
               await auth.signOut();
-              
+
               setTimeout(() => {
                 window.location.href = "/verify-email";
               }, 3000);
@@ -243,15 +238,10 @@ const RegistrationPage = () => {
                 setEmailError("⚠️ Please enter a valid email address.");
                 break;
               case "auth/weak-password":
-                setPasswordError(
-                  "⚠️ Password is too weak. Please choose a stronger password."
-                );
+                setPasswordError("⚠️ Password is too weak. Please choose a stronger password.");
                 break;
               case "auth/network-request-failed":
-                showAlert(
-                  "error",
-                  "Network error. Please check your connection and try again."
-                );
+                showAlert("error", "Network error. Please check your connection and try again.");
                 break;
               default:
                 showAlert("error", "Registration failed. Please try again.");
@@ -273,7 +263,7 @@ const RegistrationPage = () => {
 
   return (
     <>
-{/* Toast-style alert - doesn't affect layout */}
+      {/* Toast-style alert - doesn't affect layout */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -295,8 +285,8 @@ const RegistrationPage = () => {
         }}
       >
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full lg:py-0">
-          
-          <a href="#"
+          <a
+            href="#"
             className="flex items-center mb-6 mt-20 text-2xl font-semibold text-gray-900 dark:text-black"
           >
             <span className="flex items-center text-5xl font-extrabold dark:text-white">
@@ -309,11 +299,7 @@ const RegistrationPage = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-black">
                 Create your account
               </h1>
-              <form
-                className="space-y-4 md:space-y-6"
-                action="#"
-                onSubmit={signUp}
-              >
+              <form className="space-y-4 md:space-y-6" action="#" onSubmit={signUp}>
                 <div>
                   <label
                     htmlFor="userName"
@@ -340,9 +326,7 @@ const RegistrationPage = () => {
                     required
                   />
                   {usernameError && (
-                    <p className="text-sm mt-2 animate-pulse text-red-500">
-                      {usernameError}
-                    </p>
+                    <p className="text-sm mt-2 animate-pulse text-red-500">{usernameError}</p>
                   )}
                 </div>
 
@@ -369,9 +353,7 @@ const RegistrationPage = () => {
                     required
                   />
                   {emailError && (
-                    <p className="text-sm mt-2 animate-pulse text-red-500">
-                      {emailError}
-                    </p>
+                    <p className="text-sm mt-2 animate-pulse text-red-500">{emailError}</p>
                   )}
                 </div>
 
@@ -383,8 +365,7 @@ const RegistrationPage = () => {
                     Password
                   </label>
                   <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                    Must contain: 8+ characters, uppercase, lowercase, number,
-                    and special character
+                    Must contain: 8+ characters, uppercase, lowercase, number, and special character
                   </div>
                   <div className="relative">
                     <input
@@ -438,9 +419,7 @@ const RegistrationPage = () => {
                   </div>
 
                   {passwordError && (
-                    <p className="text-sm mt-2 animate-pulse text-red-500">
-                      {passwordError}
-                    </p>
+                    <p className="text-sm mt-2 animate-pulse text-red-500">{passwordError}</p>
                   )}
                 </div>
 
@@ -455,10 +434,7 @@ const RegistrationPage = () => {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="terms"
-                      className="font-light text-gray-500 dark:text-black"
-                    >
+                    <label htmlFor="terms" className="font-light text-gray-500 dark:text-black">
                       I accept the{" "}
                       <Link
                         to="/termsofservice"
@@ -498,7 +474,7 @@ const RegistrationPage = () => {
           </div>
         </div>
       </section>
-</>
+    </>
   );
 };
 

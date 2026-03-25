@@ -12,11 +12,8 @@ vi.mock("../../Firebase", () => ({
 }));
 
 // Import after mocks
-const {
-  detectFreshBrowserSession,
-  cleanupSessionData,
-  handleLogout,
-} = await import("../../utils/sessionUtils");
+const { detectFreshBrowserSession, cleanupSessionData, handleLogout } =
+  await import("../../utils/sessionUtils");
 
 describe("sessionUtils", () => {
   beforeEach(() => {

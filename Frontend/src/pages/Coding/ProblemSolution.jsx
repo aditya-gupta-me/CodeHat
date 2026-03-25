@@ -21,12 +21,7 @@ const override = css`
 const CodeBlock = ({ node, inline, className, children }) => {
   const match = /language-(\w+)/.exec(className || "");
   return !inline && match ? (
-    <SyntaxHighlighter
-      style={tomorrow}
-      language={match[1]}
-      PreTag="div"
-      className="rounded-lg"
-    >
+    <SyntaxHighlighter style={tomorrow} language={match[1]} PreTag="div" className="rounded-lg">
       {String(children).replace(/\n$/, "")}
     </SyntaxHighlighter>
   ) : (
@@ -102,20 +97,15 @@ function ProblemSolution() {
   if (isLoadingAuth) {
     return (
       <>
-<div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             <div className="flex justify-center items-center h-screen">
-              <ScaleLoader
-                css={override}
-                size={100}
-                color={"#123abc"}
-                loading={isLoadingAuth}
-              />
+              <ScaleLoader css={override} size={100} color={"#123abc"} loading={isLoadingAuth} />
               <DisplayQuotes />
             </div>
           </main>
         </div>
-</>
+      </>
     );
   }
 
@@ -123,28 +113,28 @@ function ProblemSolution() {
   if (!user) {
     return (
       <>
-<NoLoginError />
-</>
+        <NoLoginError />
+      </>
     );
   }
 
   if (loading) {
     return (
       <>
-<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
             <p className="text-gray-600 font-medium">Loading solution...</p>
           </div>
         </div>
-</>
+      </>
     );
   }
 
   if (error) {
     return (
       <>
-<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center bg-white p-8 rounded-xl shadow-lg max-w-md">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -165,13 +155,13 @@ function ProblemSolution() {
             <p className="text-gray-600">{error}</p>
           </div>
         </div>
-</>
+      </>
     );
   }
 
   return (
     <>
-<div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-160px)]">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden">
@@ -179,13 +169,9 @@ function ProblemSolution() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h1 className="text-xl font-bold text-gray-900 mb-2">
-                      {solution?.problemId || "N/A"}.{" "}
-                      {solution?.title || "Untitled Problem"}
+                      {solution?.problemId || "N/A"}. {solution?.title || "Untitled Problem"}
                     </h1>
-                    <Link
-                      to={`/solve/${id}`}
-                      className="text-sm text-blue-600 hover:underline"
-                    >
+                    <Link to={`/solve/${id}`} className="text-sm text-blue-600 hover:underline">
                       ← Back to Problem Solver
                     </Link>
                   </div>
@@ -223,9 +209,7 @@ function ProblemSolution() {
                         {solution.description}
                       </ReactMarkdown>
                     ) : (
-                      <p className="text-gray-500">
-                        No problem description available.
-                      </p>
+                      <p className="text-gray-500">No problem description available.</p>
                     )}
                   </>
                 )}
@@ -246,9 +230,7 @@ function ProblemSolution() {
             {/* Right Panel - Final Solution Code */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
               <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Final Solution
-                </h2>
+                <h2 className="text-lg font-semibold text-gray-900">Final Solution</h2>
               </div>
               <div className="flex-1 overflow-auto p-6">
                 {solution?.solutionCode ? (
@@ -268,7 +250,7 @@ function ProblemSolution() {
           </div>
         </div>
       </div>
-</>
+    </>
   );
 }
 

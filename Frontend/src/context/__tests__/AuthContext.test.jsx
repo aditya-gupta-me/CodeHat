@@ -117,9 +117,7 @@ describe("AuthContext", () => {
     renderWithAuth();
 
     await waitFor(() => {
-      expect(screen.getByTestId("username")).toHaveTextContent(
-        "test@example.com"
-      );
+      expect(screen.getByTestId("username")).toHaveTextContent("test@example.com");
     });
   });
 

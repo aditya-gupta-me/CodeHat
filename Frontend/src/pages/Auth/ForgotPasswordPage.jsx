@@ -26,7 +26,7 @@ const ForgotPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!email) {
       showAlert("warning", "Please enter your email address");
       return;
@@ -39,29 +39,32 @@ const ForgotPasswordPage = () => {
         url: `${window.location.origin}/login`, // Redirect URL after password reset
         handleCodeInApp: false,
       });
-      
+
       setEmailSent(true);
-      showAlert("success", "Password reset email has been sent! Check your inbox and spam folder.", false);
-      
+      showAlert(
+        "success",
+        "Password reset email has been sent! Check your inbox and spam folder.",
+        false
+      );
     } catch (error) {
       console.error("Password reset error:", error);
-      
+
       let errorMessage = "An error occurred. Please try again.";
-      
+
       switch (error.code) {
-        case 'auth/user-not-found':
+        case "auth/user-not-found":
           errorMessage = "No account found with this email address.";
           break;
-        case 'auth/invalid-email':
+        case "auth/invalid-email":
           errorMessage = "Please enter a valid email address.";
           break;
-        case 'auth/too-many-requests':
+        case "auth/too-many-requests":
           errorMessage = "Too many requests. Please try again later.";
           break;
         default:
           errorMessage = error.message;
       }
-      
+
       showAlert("error", errorMessage);
     } finally {
       setLoading(false);
@@ -85,7 +88,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-{/* Toast-style alert */}
+      {/* Toast-style alert */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -107,8 +110,8 @@ const ForgotPasswordPage = () => {
         }}
       >
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto w-full lg:py-0">
-          
-          <a href="#"
+          <a
+            href="#"
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-black"
           >
             <span className="flex items-center text-5xl font-extrabold dark:text-white">
@@ -126,7 +129,7 @@ const ForgotPasswordPage = () => {
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     Enter your email address and we'll send you a link to reset your password.
                   </p>
-                  
+
                   <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                     <div>
                       <label
@@ -192,7 +195,7 @@ const ForgotPasswordPage = () => {
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
                       Didn't receive the email? Check your spam folder or try again.
                     </p>
-                    
+
                     <div className="space-y-3">
                       <button
                         onClick={handleResendEmail}
@@ -203,7 +206,7 @@ const ForgotPasswordPage = () => {
                       >
                         {loading ? "Sending..." : "Resend Email"}
                       </button>
-                      
+
                       <Link
                         to="/login"
                         className="block w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -218,7 +221,7 @@ const ForgotPasswordPage = () => {
           </div>
         </div>
       </section>
-</>
+    </>
   );
 };
 

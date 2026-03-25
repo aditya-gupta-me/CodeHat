@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function PageNotFoundError() {
   return (
     <>
-<div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
         {/* Main content container */}
         <div className="flex-grow flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
           <div className="max-w-6xl w-full">
@@ -15,9 +15,8 @@ function PageNotFoundError() {
                     Oops! Page Not Found
                   </h1>
                   <p className="text-lg sm:text-xl text-gray-600 mb-6 leading-relaxed">
-                    Looks like you've found the doorway to the great nothing.
-                    Sorry about that! Please visit our homepage to get where you
-                    need to go.
+                    Looks like you've found the doorway to the great nothing. Sorry about that!
+                    Please visit our homepage to get where you need to go.
                   </p>
                   <Link to="/" className="inline-block">
                     <button className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-opacity-50">
@@ -53,7 +52,7 @@ function PageNotFoundError() {
           </div>
         </div>
       </div>
-</>
+    </>
   );
 }
 

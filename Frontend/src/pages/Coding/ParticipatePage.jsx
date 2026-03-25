@@ -15,8 +15,8 @@ const ParticipatePage = () => {
           Participate & Showcase Your Skills
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg">
-          Join exciting challenges, compete with peers, and get recognized.
-          Discover opportunities designed to help you grow!
+          Join exciting challenges, compete with peers, and get recognized. Discover opportunities
+          designed to help you grow!
         </p>
       </section>
 
@@ -25,12 +25,10 @@ const ParticipatePage = () => {
       </section>
 
       <section className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-6 sm:p-10 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          Ready to Get Started?
-        </h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Ready to Get Started?</h2>
         <p className="text-gray-600 mb-6">
-          Stay tuned for upcoming coding events and project collaborations.
-          You can participate as an individual or form a team.
+          Stay tuned for upcoming coding events and project collaborations. You can participate as
+          an individual or form a team.
         </p>
         <button
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200"

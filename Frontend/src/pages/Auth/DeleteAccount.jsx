@@ -68,7 +68,11 @@ const DeleteAccount = () => {
       } catch (firestoreError) {
         console.error("Error deleting Firestore document:", firestoreError);
         // Continue with deletion even if Firestore fails
-        showAlert("warning", "Some profile data couldn't be deleted, but continuing with account deletion...", false);
+        showAlert(
+          "warning",
+          "Some profile data couldn't be deleted, but continuing with account deletion...",
+          false
+        );
       }
 
       // Step 2: Delete from your backend/MongoDB
@@ -95,7 +99,6 @@ const DeleteAccount = () => {
           replace: true,
         });
       }, 2000);
-
     } catch (error) {
       if (error.code === "auth/requires-recent-login") {
         showAlert(
@@ -114,29 +117,24 @@ const DeleteAccount = () => {
   if (loadingUser) {
     return (
       <>
-<main className="min-h-screen flex justify-center items-center">
-          <ScaleLoader
-            cssOverride={override}
-            size={100}
-            color={"#123abc"}
-            loading={loadingUser}
-          />
+        <main className="min-h-screen flex justify-center items-center">
+          <ScaleLoader cssOverride={override} size={100} color={"#123abc"} loading={loadingUser} />
         </main>
-</>
+      </>
     );
   }
 
   if (!user && !redirectingRef.current) {
     return (
       <>
-<NoUserError />
-</>
+        <NoUserError />
+      </>
     );
   }
 
   return (
     <>
-{/* Toast-style alert - doesn't affect layout */}
+      {/* Toast-style alert - doesn't affect layout */}
       {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
@@ -158,9 +156,9 @@ const DeleteAccount = () => {
           </h2>
 
           <p className="text-[0.95rem] leading-relaxed mb-5">
-            Deleting your account will permanently erase your authentication
-            credentials and remove all your profile information stored with us.
-            You won't be able to recover your data after this action.
+            Deleting your account will permanently erase your authentication credentials and remove
+            all your profile information stored with us. You won't be able to recover your data
+            after this action.
           </p>
 
           {!confirming ? (
@@ -174,10 +172,7 @@ const DeleteAccount = () => {
             <div className="space-y-5">
               <p className="text-sm text-gray-700">
                 Are you absolutely sure? Please type{" "}
-                <span className="font-semibold italic">
-                  "{REQUIRED_PHRASE}"
-                </span>{" "}
-                to confirm.
+                <span className="font-semibold italic">"{REQUIRED_PHRASE}"</span> to confirm.
               </p>
 
               <input
@@ -215,7 +210,7 @@ const DeleteAccount = () => {
           )}
         </div>
       </main>
-</>
+    </>
   );
 };
 

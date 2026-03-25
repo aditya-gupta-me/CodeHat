@@ -66,19 +66,17 @@ function PythonCompiler() {
     setOutput("Running code...");
     try {
       // Filter out empty inputs
-      const nonEmptyInputs = inputs.filter(input => input.trim() !== "");
-      
-      const { data } = await axios.post(`${backend_api}/py`, { 
+      const nonEmptyInputs = inputs.filter((input) => input.trim() !== "");
+
+      const { data } = await axios.post(`${backend_api}/py`, {
         code,
-        inputs: nonEmptyInputs
+        inputs: nonEmptyInputs,
       });
       const cleanOutput = extractRelevantOutput(data.passOrFail);
       setOutput(cleanOutput);
     } catch (error) {
       console.error("Error occurred:", error);
-      setOutput(
-        "Error: Could not connect to the server. Please try again later."
-      );
+      setOutput("Error: Could not connect to the server. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -134,16 +132,37 @@ function PythonCompiler() {
           >
             {isSubmitting ? (
               <>
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
                 </svg>
                 Running...
               </>
             ) : (
               <>
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
                 </svg>
                 Run Code
               </>
@@ -159,8 +178,18 @@ function PythonCompiler() {
             <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
               <div className="bg-slate-700 px-6 py-3 border-b border-slate-600">
                 <h2 className="text-lg font-semibold text-slate-100 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                  <svg
+                    className="w-5 h-5 mr-2 text-blue-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                    ></path>
                   </svg>
                   Code Editor
                 </h2>
@@ -174,8 +203,18 @@ function PythonCompiler() {
             <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
               <div className="bg-slate-700 px-6 py-3 border-b border-slate-600 flex justify-between items-center">
                 <h3 className="text-lg font-semibold text-slate-100 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  <svg
+                    className="w-5 h-5 mr-2 text-green-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
                   Output
                 </h3>
@@ -185,8 +224,18 @@ function PythonCompiler() {
                     disabled={!output}
                     className="px-3 py-1.5 text-sm font-medium bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                   >
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      ></path>
                     </svg>
                     Copy
                   </button>
@@ -195,8 +244,18 @@ function PythonCompiler() {
                     disabled={!output}
                     className="px-3 py-1.5 text-sm font-medium bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                   >
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
                     </svg>
                     Save
                   </button>
@@ -215,21 +274,41 @@ function PythonCompiler() {
             <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden sticky top-6">
               <div className="bg-slate-700 px-6 py-3 border-b border-slate-600">
                 <h3 className="text-lg font-semibold text-slate-100 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                  <svg
+                    className="w-5 h-5 mr-2 text-purple-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                    ></path>
                   </svg>
                   User Inputs
                 </h3>
               </div>
-              
+
               <div className="p-6">
                 <div className="mb-4 flex gap-2">
                   <button
                     onClick={addInputField}
                     className="flex-1 px-3 py-2 text-sm font-medium bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors duration-200 flex items-center justify-center"
                   >
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      ></path>
                     </svg>
                     Add
                   </button>
@@ -237,17 +316,29 @@ function PythonCompiler() {
                     onClick={clearAllInputs}
                     className="flex-1 px-3 py-2 text-sm font-medium bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-200 flex items-center justify-center"
                   >
-                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      ></path>
                     </svg>
                     Clear
                   </button>
                 </div>
-                
+
                 <p className="text-xs text-slate-400 mb-4 leading-relaxed">
-                  Add inputs for your Python <code className="bg-slate-700 px-1 rounded text-slate-300">input()</code> functions. They'll be used in order.
+                  Add inputs for your Python{" "}
+                  <code className="bg-slate-700 px-1 rounded text-slate-300">input()</code>{" "}
+                  functions. They'll be used in order.
                 </p>
-                
+
                 <div className="space-y-3 max-h-96 overflow-y-auto">
                   {inputs.map((input, index) => (
                     <div key={index} className="group">
@@ -260,8 +351,18 @@ function PythonCompiler() {
                             onClick={() => removeInputField(index)}
                             className="opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:text-red-300 transition-all duration-200"
                           >
-                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <svg
+                              className="w-3 h-3"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              ></path>
                             </svg>
                           </button>
                         )}
@@ -276,16 +377,18 @@ function PythonCompiler() {
                     </div>
                   ))}
                 </div>
-                
-                {inputs.filter(i => i.trim()).length > 0 && (
+
+                {inputs.filter((i) => i.trim()).length > 0 && (
                   <div className="mt-4 p-3 bg-slate-700 rounded-lg border border-slate-600">
                     <p className="text-xs text-slate-400 mb-2">Preview:</p>
                     <div className="space-y-1">
-                      {inputs.filter(i => i.trim()).map((input, index) => (
-                        <div key={index} className="text-xs text-slate-300 font-mono">
-                          <span className="text-slate-500">#{index + 1}:</span> "{input}"
-                        </div>
-                      ))}
+                      {inputs
+                        .filter((i) => i.trim())
+                        .map((input, index) => (
+                          <div key={index} className="text-xs text-slate-300 font-mono">
+                            <span className="text-slate-500">#{index + 1}:</span> "{input}"
+                          </div>
+                        ))}
                     </div>
                   </div>
                 )}
