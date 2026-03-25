@@ -29,94 +29,114 @@ function PracticePage() {
     }
   };
 
-  return (
-    <div>
-      {isLoading ? (
-        <div className="flex justify-center items-center h-screen">
-          <ScaleLoader size={100} color="#123abc" loading={isLoading} />
-          <DisplayQuotes />
-        </div>
-      ) : user ? (
-        <div className="container mx-auto p-4">
-          <div className="overflow-x-auto">
-            <div className="py-2">
-              <h1 className="m-3">
-                <span className="text-3xl font-bold">Problem</span>
-              </h1>
-              <table className="w-full table-auto">
-                <thead className="bg-white border-b">
-                  <tr>
-                    <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      #Problem_ID
-                    </th>
-                    <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      Problem Title
-                    </th>
-                    <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      Solution Available
-                    </th>
-                    <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                      Difficulty
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {problems.length > 0 ? (
-                    problems.map((problem, index) => (
-                      <tr
-                        key={problem._id}
-                        className={index % 2 === 0 ? "bg-gray-100 border-b" : "bg-white border-b"}
-                      >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {problem.problemId}
-                        </td>
-                        <td className="text-base font-normal text-gray-900 px-6 py-4 whitespace-nowrap">
-                          <Link to={`/solve/${problem._id}`} className="hover:text-yellow-900">
-                            {problem.title}
-                          </Link>
-                        </td>
-                        <td className="text-base font-normal text-gray-900 px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`px-2 py-1 rounded text-xs font-medium ${
-                              problem.solutionLink
-                                ? "bg-green-100 text-green-800"
-                                : "bg-red-100 text-red-800"
-                            }`}
-                          >
-                            {problem.solutionLink ? "Yes" : "No"}
-                          </span>
-                        </td>
+  const getDifficultyBadge = (difficulty) => {
+    switch (difficulty) {
+      case "Easy":
+        return "badge-easy";
+      case "Medium":
+        return "badge-medium";
+      case "Hard":
+        return "badge-hard";
+      default:
+        return "badge-easy";
+    }
+  };
 
-                        <td className="text-base font-normal text-gray-900 px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`px-2 py-1 rounded text-xs font-medium ${
-                              problem.difficulty === "Easy"
-                                ? "bg-green-100 text-green-800"
-                                : problem.difficulty === "Medium"
-                                  ? "bg-yellow-100 text-yellow-800"
-                                  : "bg-red-100 text-red-800"
-                            }`}
-                          >
-                            {problem.difficulty}
-                          </span>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
-                        No problems available
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
+  if (isLoading) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen bg-ch-dark">
+        <ScaleLoader color="#00e5a0" loading={isLoading} />
+        <DisplayQuotes />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <NoLoginError />;
+  }
+
+  return (
+    <div className="min-h-screen bg-ch-dark">
+      <div className="max-w-7xl mx-auto px-6 py-10">
+        {/* Page header */}
+        <div className="mb-8">
+          <h1 className="font-display text-3xl font-bold text-ch-text mb-2">
+            Practice Problems
+          </h1>
+          <p className="text-ch-muted">
+            Sharpen your skills with AI-generated challenges
+          </p>
         </div>
-      ) : (
-        <NoLoginError />
-      )}
+
+        {/* Problem cards / table */}
+        <div className="card-surface overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-ch-border">
+                <th className="text-left px-6 py-4 text-xs font-code uppercase tracking-wider text-ch-muted">
+                  #ID
+                </th>
+                <th className="text-left px-6 py-4 text-xs font-code uppercase tracking-wider text-ch-muted">
+                  Title
+                </th>
+                <th className="text-left px-6 py-4 text-xs font-code uppercase tracking-wider text-ch-muted">
+                  Solution
+                </th>
+                <th className="text-left px-6 py-4 text-xs font-code uppercase tracking-wider text-ch-muted">
+                  Difficulty
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {problems.length > 0 ? (
+                problems.map((problem) => (
+                  <tr
+                    key={problem._id}
+                    className="border-b border-ch-border/50 hover:bg-ch-surface-raised transition-colors"
+                  >
+                    <td className="px-6 py-4 text-sm font-code text-ch-muted">
+                      {problem.problemId}
+                    </td>
+                    <td className="px-6 py-4">
+                      <Link
+                        to={`/solve/${problem._id}`}
+                        className="text-ch-text hover:text-ch-accent transition-colors font-medium"
+                      >
+                        {problem.title}
+                      </Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${
+                          problem.solutionLink
+                            ? "bg-ch-success/20 text-ch-success"
+                            : "bg-ch-danger/20 text-ch-danger"
+                        }`}
+                      >
+                        {problem.solutionLink ? "Yes" : "No"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={getDifficultyBadge(problem.difficulty)}>
+                        {problem.difficulty}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="4"
+                    className="px-6 py-12 text-center text-ch-muted"
+                  >
+                    No problems available yet. Check back soon!
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

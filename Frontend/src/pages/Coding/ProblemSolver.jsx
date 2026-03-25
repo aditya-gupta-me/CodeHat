@@ -84,7 +84,8 @@ const formatFunctionSignature = (functionSignature, testCase) => {
 
   if (params.length === 0 && testCase?.input) {
     // If no parameters defined but input exists, use input keys
-    const inputKeys = typeof testCase.input === "object" ? Object.keys(testCase.input) : [];
+    const inputKeys =
+      typeof testCase.input === "object" ? Object.keys(testCase.input) : [];
     return `def ${funcName}(${inputKeys.join(", ")}):`;
   }
 
@@ -244,55 +245,60 @@ function ProblemSolver() {
       case "Hard":
         return "bg-red-50 text-red-700 border-red-200";
       default:
-        return "bg-gray-50 text-gray-700 border-gray-200";
+        return "bg-ch-dark text-ch-muted border-ch-border";
     }
   };
 
   if (isLoadingAuth) {
     return (
       <>
-        <div className="min-h-screen flex flex-col">
+<div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             <div className="flex justify-center items-center h-screen">
-              <ScaleLoader css={override} size={100} color={"#123abc"} loading={isLoadingAuth} />
+              <ScaleLoader
+                css={override}
+                size={100}
+                color={"#123abc"}
+                loading={isLoadingAuth}
+              />
               <DisplayQuotes />
             </div>
           </main>
         </div>
-      </>
+</>
     );
   }
 
   if (!user) {
     return (
       <>
-        <div className="min-h-screen flex flex-col">
+<div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             <NoLoginError />
           </main>
         </div>
-      </>
+</>
     );
   }
 
   if (loading) {
     return (
       <>
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+<div className="min-h-screen bg-ch-dark flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
-            <p className="text-gray-600 font-medium">Loading problem...</p>
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-ch-accent border-t-transparent mx-auto mb-4"></div>
+            <p className="text-ch-muted font-medium">Loading problem...</p>
           </div>
         </div>
-      </>
+</>
     );
   }
 
   if (error) {
     return (
       <>
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="text-center bg-white p-8 rounded-xl shadow-lg max-w-md">
+<div className="min-h-screen bg-ch-dark flex items-center justify-center">
+          <div className="text-center bg-ch-surface p-8 rounded-xl shadow-lg max-w-md">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
                 className="w-8 h-8 text-red-600"
@@ -308,31 +314,32 @@ function ProblemSolver() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Error</h2>
-            <p className="text-gray-600">{error}</p>
+            <h2 className="text-2xl font-bold text-ch-text mb-2">Error</h2>
+            <p className="text-ch-muted">{error}</p>
           </div>
         </div>
-      </>
+</>
     );
   }
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+<div className="min-h-screen bg-ch-dark">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-160px)]">
             {/* Left Panel - Problem Description */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden">
+            <div className="bg-ch-surface rounded-xl shadow-sm border border-ch-border flex flex-col overflow-hidden">
               {/* Problem Header */}
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 border-b border-gray-200">
+              <div className="bg-ch-surface-raised p-6 border-b border-ch-border">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h1 className="text-xl font-bold text-gray-900 mb-2">
-                      {problem?.problemId || "N/A"}. {problem?.title || "Untitled Problem"}
+                    <h1 className="text-xl font-bold text-ch-text mb-2">
+                      {problem?.problemId || "N/A"}.{" "}
+                      {problem?.title || "Untitled Problem"}
                     </h1>
                     <Link
                       to={`/solve/${id}/solution`}
-                      className="text-sm text-blue-600 dark:text-blue-400 hover:underline mt-1 inline-block"
+                      className="text-sm text-ch-accent dark:text-ch-accent hover:underline mt-1 inline-block"
                     >
                       View Solution →
                     </Link>
@@ -348,13 +355,13 @@ function ProblemSolver() {
               </div>
 
               {/* Tabs */}
-              <div className="flex border-b border-gray-200 bg-gray-50">
+              <div className="flex border-b border-ch-border bg-ch-dark">
                 <button
                   onClick={() => setActiveTab("problem")}
                   className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
                     activeTab === "problem"
-                      ? "border-b-2 border-blue-500 text-blue-600 bg-white"
-                      : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                      ? "border-b-2 border-ch-accent text-ch-accent bg-ch-surface"
+                      : "text-ch-muted hover:text-ch-muted hover:bg-ch-surface-raised"
                   }`}
                 >
                   Problem
@@ -363,46 +370,50 @@ function ProblemSolver() {
                   onClick={() => setActiveTab("testcases")}
                   className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
                     activeTab === "testcases"
-                      ? "border-b-2 border-blue-500 text-blue-600 bg-white"
-                      : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                      ? "border-b-2 border-ch-accent text-ch-accent bg-ch-surface"
+                      : "text-ch-muted hover:text-ch-muted hover:bg-ch-surface-raised"
                   }`}
                 >
                   Test Cases
                 </button>
-                {problem?.hints && problem.hints.length > 0 && problem.hints[0] && (
-                  <button
-                    onClick={() => setActiveTab("hints")}
-                    className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
-                      activeTab === "hints"
-                        ? "border-b-2 border-blue-500 text-blue-600 bg-white"
-                        : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
-                    }`}
-                  >
-                    Hints
-                  </button>
-                )}
+                {problem?.hints &&
+                  problem.hints.length > 0 &&
+                  problem.hints[0] && (
+                    <button
+                      onClick={() => setActiveTab("hints")}
+                      className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
+                        activeTab === "hints"
+                          ? "border-b-2 border-ch-accent text-ch-accent bg-ch-surface"
+                          : "text-ch-muted hover:text-ch-muted hover:bg-ch-surface-raised"
+                      }`}
+                    >
+                      Hints
+                    </button>
+                  )}
               </div>
 
               {/* Tab Content */}
               <div className="flex-1 overflow-y-auto">
                 {activeTab === "problem" && (
                   <div className="p-6">
-                    <div className="prose max-w-none prose-slate prose-headings:text-gray-900 prose-p:text-gray-700 prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
+                    <div className="prose max-w-none prose-slate prose-headings:text-ch-text prose-p:text-ch-muted prose-code:text-ch-accent prose-code:bg-ch-surface-raised prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
                       {problem?.description ? (
                         <div>
                           <SafeMarkdown content={problem.description} />
                         </div>
                       ) : (
-                        <p className="text-gray-500">No description available</p>
+                        <p className="text-ch-muted">
+                          No description available
+                        </p>
                       )}
 
                       {/* Function Signature */}
                       {problem?.functionSignature && (
-                        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                          <h3 className="text-lg font-semibold mb-3 text-blue-900">
+                        <div className="mt-6 p-4 bg-ch-surface-raised rounded-lg border border-ch-accent/30">
+                          <h3 className="text-lg font-semibold mb-3 text-ch-accent">
                             Function Signature:
                           </h3>
-                          <pre className="bg-white p-3 rounded-md border border-blue-300 text-sm font-mono text-gray-800 overflow-x-auto">
+                          <pre className="bg-ch-surface p-3 rounded-md border border-ch-accent/30 text-sm font-mono text-ch-text overflow-x-auto">
                             {formatFunctionSignature(
                               problem.functionSignature,
                               problem.testCases?.[0]
@@ -412,8 +423,10 @@ function ProblemSolver() {
                       )}
 
                       {problem?.constraints && (
-                        <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                          <h3 className="text-lg font-semibold mb-3 text-gray-900">Constraints:</h3>
+                        <div className="mt-8 p-4 bg-ch-dark rounded-lg border border-ch-border">
+                          <h3 className="text-lg font-semibold mb-3 text-ch-text">
+                            Constraints:
+                          </h3>
                           <SafeMarkdown content={problem.constraints} />
                         </div>
                       )}
@@ -423,7 +436,9 @@ function ProblemSolver() {
 
                 {activeTab === "testcases" && (
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold mb-6 text-gray-900">Sample Test Cases</h3>
+                    <h3 className="text-lg font-semibold mb-6 text-ch-text">
+                      Sample Test Cases
+                    </h3>
                     {problem?.testCases &&
                     Array.isArray(problem.testCases) &&
                     problem.testCases.length > 0 ? (
@@ -433,27 +448,27 @@ function ProblemSolver() {
                           .map((testCase, index) => (
                             <div
                               key={index}
-                              className="bg-gray-50 rounded-lg p-5 border border-gray-200"
+                              className="bg-ch-dark rounded-lg p-5 border border-ch-border"
                             >
-                              <h4 className="font-semibold mb-4 text-gray-900">
+                              <h4 className="font-semibold mb-4 text-ch-text">
                                 Example {index + 1}:
                               </h4>
                               <div className="space-y-3">
                                 <div>
-                                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                                  <label className="block text-sm font-medium text-ch-muted mb-2">
                                     Input:
                                   </label>
-                                  <pre className="bg-white p-3 rounded-md border border-gray-300 text-sm font-mono text-gray-800 overflow-x-auto">
+                                  <pre className="bg-ch-surface p-3 rounded-md border border-ch-border text-sm font-mono text-ch-text overflow-x-auto">
                                     {testCase?.input !== undefined
                                       ? formatValue(testCase.input)
                                       : "No input provided"}
                                   </pre>
                                 </div>
                                 <div>
-                                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                                  <label className="block text-sm font-medium text-ch-muted mb-2">
                                     Expected Output:
                                   </label>
-                                  <pre className="bg-white p-3 rounded-md border border-gray-300 text-sm font-mono text-gray-800 overflow-x-auto">
+                                  <pre className="bg-ch-surface p-3 rounded-md border border-ch-border text-sm font-mono text-ch-text overflow-x-auto">
                                     {testCase?.expectedOutput !== undefined
                                       ? formatValue(testCase.expectedOutput)
                                       : "No expected output"}
@@ -465,7 +480,7 @@ function ProblemSolver() {
                       </div>
                     ) : (
                       <div className="text-center py-8">
-                        <p className="text-gray-500">No test cases available</p>
+                        <p className="text-ch-muted">No test cases available</p>
                       </div>
                     )}
                   </div>
@@ -473,7 +488,9 @@ function ProblemSolver() {
 
                 {activeTab === "hints" && (
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold mb-6 text-gray-900">Hints</h3>
+                    <h3 className="text-lg font-semibold mb-6 text-ch-text">
+                      Hints
+                    </h3>
                     {problem?.hints && problem.hints.length > 0 ? (
                       <div className="space-y-4">
                         {problem.hints
@@ -511,7 +528,7 @@ function ProblemSolver() {
                       </div>
                     ) : (
                       <div className="text-center py-8">
-                        <p className="text-gray-500">No hints available</p>
+                        <p className="text-ch-muted">No hints available</p>
                       </div>
                     )}
                   </div>
@@ -520,16 +537,18 @@ function ProblemSolver() {
             </div>
 
             {/* Right Panel - Code Editor with Tabs */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden">
+            <div className="bg-ch-surface rounded-xl shadow-sm border border-ch-border flex flex-col overflow-hidden">
               {/* Header with Action Buttons */}
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+              <div className="bg-ch-surface border-b border-ch-border">
                 <div className="flex items-center justify-between p-6 pb-0">
-                  <h2 className="text-lg font-semibold text-gray-900">Code Editor</h2>
+                  <h2 className="text-lg font-semibold text-ch-text">
+                    Code Editor
+                  </h2>
                   <div className="flex gap-3">
                     <button
                       onClick={runCode}
                       disabled={isRunning}
-                      className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium text-sm shadow-sm"
+                      className="px-5 py-2.5 bg-ch-accent text-white rounded-lg hover:bg-ch-accent-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium text-sm shadow-sm"
                     >
                       {isRunning ? "Running..." : "Run Code"}
                     </button>
@@ -544,13 +563,13 @@ function ProblemSolver() {
                 </div>
 
                 {/* Sub-tabs */}
-                <div className="flex border-t border-gray-200 mt-4">
+                <div className="flex border-t border-ch-border mt-4">
                   <button
                     onClick={() => setRightPanelTab("editor")}
                     className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
                       rightPanelTab === "editor"
-                        ? "border-b-2 border-blue-500 text-blue-600 bg-white"
-                        : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                        ? "border-b-2 border-ch-accent text-ch-accent bg-ch-surface"
+                        : "text-ch-muted hover:text-ch-muted hover:bg-ch-surface-raised"
                     }`}
                   >
                     <svg
@@ -572,8 +591,8 @@ function ProblemSolver() {
                     onClick={() => setRightPanelTab("io")}
                     className={`px-6 py-3 text-sm font-medium transition-all duration-200 relative ${
                       rightPanelTab === "io"
-                        ? "border-b-2 border-blue-500 text-blue-600 bg-white"
-                        : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                        ? "border-b-2 border-ch-accent text-ch-accent bg-ch-surface"
+                        : "text-ch-muted hover:text-ch-muted hover:bg-ch-surface-raised"
                     }`}
                   >
                     <svg
@@ -592,7 +611,8 @@ function ProblemSolver() {
                     Input/Output
                     {testResults.length > 0 && (
                       <span className="ml-2 px-2 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-medium">
-                        {testResults.filter((r) => r.passed).length}/{testResults.length}
+                        {testResults.filter((r) => r.passed).length}/
+                        {testResults.length}
                       </span>
                     )}
                   </button>
@@ -610,27 +630,29 @@ function ProblemSolver() {
                 </div>
 
                 {rightPanelTab === "io" && (
-                  <div className="h-full overflow-y-auto bg-gray-50 p-6">
+                  <div className="h-full overflow-y-auto bg-ch-dark p-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-ch-muted mb-2">
                           Custom Input:
                         </label>
                         <textarea
                           value={customInput}
                           onChange={(e) => setCustomInput(e.target.value)}
-                          className="w-full p-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                          className="w-full p-3 border border-ch-border rounded-lg text-sm focus:ring-2 focus:ring-ch-accent focus:border-ch-accent transition-colors duration-200"
                           rows="8"
                           placeholder="Enter custom input here..."
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-ch-muted mb-2">
                           Output:
                         </label>
-                        <div className="w-full p-3 border border-gray-300 rounded-lg bg-white text-sm min-h-[200px] font-mono text-gray-800 whitespace-pre-wrap">
+                        <div className="w-full p-3 border border-ch-border rounded-lg bg-ch-surface text-sm min-h-[200px] font-mono text-ch-text whitespace-pre-wrap">
                           {customOutput || (
-                            <span className="text-gray-400">Output will appear here...</span>
+                            <span className="text-ch-muted">
+                              Output will appear here...
+                            </span>
                           )}
                         </div>
                       </div>
@@ -638,8 +660,8 @@ function ProblemSolver() {
 
                     {/* Test Results */}
                     {testResults.length > 0 && (
-                      <div className="border-t border-gray-200 pt-6">
-                        <h3 className="text-lg font-semibold mb-4 text-gray-900 flex items-center">
+                      <div className="border-t border-ch-border pt-6">
+                        <h3 className="text-lg font-semibold mb-4 text-ch-text flex items-center">
                           <svg
                             className="w-5 h-5 mr-2"
                             fill="none"
@@ -654,9 +676,9 @@ function ProblemSolver() {
                             />
                           </svg>
                           Test Results:
-                          <span className="ml-2 text-sm text-gray-600">
-                            ({testResults.filter((r) => r.passed).length} of {testResults.length}{" "}
-                            passed)
+                          <span className="ml-2 text-sm text-ch-muted">
+                            ({testResults.filter((r) => r.passed).length} of{" "}
+                            {testResults.length} passed)
                           </span>
                         </h3>
                         <div className="space-y-3">
@@ -696,27 +718,36 @@ function ProblemSolver() {
                                       />
                                     </svg>
                                   )}
-                                  Test {index + 1}: {result.passed ? "PASSED" : "FAILED"}
+                                  Test {index + 1}:{" "}
+                                  {result.passed ? "PASSED" : "FAILED"}
                                 </span>
-                                <span className="text-sm opacity-75">{result.executionTime}ms</span>
+                                <span className="text-sm opacity-75">
+                                  {result.executionTime}ms
+                                </span>
                               </div>
                               {!result.passed && (
                                 <div className="mt-3 text-sm space-y-2">
-                                  <div className="bg-white bg-opacity-50 p-3 rounded border-l-4 border-emerald-400">
-                                    <strong className="text-emerald-700">Expected:</strong>
+                                  <div className="bg-ch-surface bg-opacity-50 p-3 rounded border-l-4 border-emerald-400">
+                                    <strong className="text-emerald-700">
+                                      Expected:
+                                    </strong>
                                     <pre className="mt-1 text-emerald-800 font-mono text-xs">
                                       {result.expected}
                                     </pre>
                                   </div>
-                                  <div className="bg-white bg-opacity-50 p-3 rounded border-l-4 border-red-400">
-                                    <strong className="text-red-700">Got:</strong>
+                                  <div className="bg-ch-surface bg-opacity-50 p-3 rounded border-l-4 border-red-400">
+                                    <strong className="text-red-700">
+                                      Got:
+                                    </strong>
                                     <pre className="mt-1 text-red-800 font-mono text-xs">
                                       {result.actual}
                                     </pre>
                                   </div>
                                   {result.error && (
-                                    <div className="bg-white bg-opacity-50 p-3 rounded border-l-4 border-orange-400">
-                                      <strong className="text-orange-700">Error:</strong>
+                                    <div className="bg-ch-surface bg-opacity-50 p-3 rounded border-l-4 border-orange-400">
+                                      <strong className="text-orange-700">
+                                        Error:
+                                      </strong>
                                       <pre className="mt-1 text-orange-800 font-mono text-xs">
                                         {result.error}
                                       </pre>
@@ -736,7 +767,7 @@ function ProblemSolver() {
           </div>
         </div>
       </div>
-    </>
+</>
   );
 }
 

@@ -1,3 +1,73 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Syne:wght@400..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── Global base ─── */
+@layer base {
+  body {
+    @apply bg-ch-dark text-ch-text font-body antialiased;
+  }
+
+  /* Scrollbar styling for dark theme */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ch-dark;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ch-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ch-muted;
+  }
+}
+
+/* ─── Reusable component classes ─── */
+@layer components {
+  /* Primary CTA button */
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-6 py-3
+      bg-ch-accent text-ch-dark font-semibold rounded-lg
+      hover:bg-ch-accent-hover transition-colors duration-200;
+  }
+
+  /* Ghost / outlined button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3
+      border border-ch-border text-ch-text font-semibold rounded-lg
+      hover:border-ch-accent hover:text-ch-accent transition-colors duration-200;
+  }
+
+  /* Surface card */
+  .card-surface {
+    @apply bg-ch-surface border border-ch-border rounded-xl;
+  }
+
+  /* Code/metric label style */
+  .text-label {
+    @apply font-code text-xs uppercase tracking-widest text-ch-muted;
+  }
+
+  /* Section heading */
+  .section-heading {
+    @apply font-code text-xs uppercase tracking-widest text-ch-muted mb-6;
+  }
+
+  /* Difficulty badges */
+  .badge-easy {
+    @apply inline-block px-2.5 py-0.5 text-xs font-semibold rounded
+      bg-ch-success/20 text-ch-success;
+  }
+  .badge-medium {
+    @apply inline-block px-2.5 py-0.5 text-xs font-semibold rounded
+      bg-ch-warning/20 text-ch-warning;
+  }
+  .badge-hard {
+    @apply inline-block px-2.5 py-0.5 text-xs font-semibold rounded
+      bg-ch-danger/20 text-ch-danger;
+  }
+}

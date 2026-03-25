@@ -1,31 +1,50 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const navigation = [
   { name: "Home", to: "/" },
-  { name: "Participate", to: "/participate" },
   { name: "Practice", to: "/practice" },
+  { name: "Compete", to: "/participate" },
 ];
+
+const compilerLinks = [
+  { name: "Python", to: "/pythoncompiler" },
+  { name: "Java", to: "/javacompiler" },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
 export default function Header() {
   const { user, username, signOut: handleSignOut } = useAuth();
   const location = useLocation();
 
+  /**
+   * Get user initials for the avatar circle.
+   */
+  const getInitials = () => {
+    if (username) {
+      return username.slice(0, 2).toUpperCase();
+    }
+    if (user?.email) {
+      return user.email.slice(0, 2).toUpperCase();
+    }
+    return "U";
+  };
+
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-ch-dark border-b border-ch-border">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-20 items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              {/* Mobile menu button */}
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-ch-muted hover:text-ch-text hover:bg-ch-surface focus:outline-none focus:ring-2 focus:ring-ch-accent">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -34,37 +53,52 @@ export default function Header() {
                   )}
                 </Disclosure.Button>
               </div>
+
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                {/* Logo */}
                 <div className="flex flex-shrink-0 items-center">
-                  <span className="flex items-center text-3xl font-extrabold right-20 dark:text-white">
-                    <Link to="/">CodeHat</Link>
-                  </span>
+                  <Link
+                    to="/"
+                    className="text-2xl font-display font-bold text-ch-accent tracking-tight"
+                  >
+                    CodeHat
+                  </Link>
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+
+                {/* Desktop nav */}
+                <div className="hidden sm:ml-10 sm:block">
+                  <div className="flex items-center space-x-1">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
                         to={item.to}
                         className={classNames(
-                          location.pathname === item.to
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-base font-medium"
+                          location.pathname === item.to ||
+                            (item.to !== "/" && location.pathname.startsWith(item.to))
+                            ? "text-ch-accent"
+                            : "text-ch-muted hover:text-ch-text",
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150"
                         )}
                       >
                         {item.name}
                       </Link>
                     ))}
-                    <Menu as="div" className="relative ml-3">
-                      <div>
-                        <Menu.Button className="flex">
-                          <span className="sr-only">Open user menu</span>
-                          <span className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium">
-                            Online Compilers
-                          </span>
-                        </Menu.Button>
-                      </div>
+
+                    {/* Compiler dropdown */}
+                    <Menu as="div" className="relative">
+                      <Menu.Button
+                        className={classNames(
+                          location.pathname.includes("compiler")
+                            ? "text-ch-accent"
+                            : "text-ch-muted hover:text-ch-text",
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 inline-flex items-center gap-1"
+                        )}
+                      >
+                        Compiler
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </Menu.Button>
                       <Transition
                         as={Fragment}
                         enter="transition ease-out duration-100"
@@ -74,86 +108,48 @@ export default function Header() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/pythoncompiler"
-                                className={classNames(
-                                  active ? "bg-gray-300" : "",
-                                  "block px-4 py-2 text-sm text-gray-800"
-                                )}
-                              >
-                                Python
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="/javacompiler"
-                                className={classNames(
-                                  active ? "bg-gray-300" : "",
-                                  "block px-4 py-2 text-sm text-gray-800"
-                                )}
-                              >
-                                Java
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <span
-                                title="Coming Soon"
-                                className={classNames(
-                                  "block px-4 py-2 text-sm text-gray-400 cursor-not-allowed"
-                                )}
-                              >
-                                C++ (Coming Soon)
-                              </span>
-                            )}
-                          </Menu.Item>
+                        <Menu.Items className="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-lg bg-ch-surface border border-ch-border py-1 shadow-xl shadow-black/30 focus:outline-none">
+                          {compilerLinks.map((lang) => (
+                            <Menu.Item key={lang.name}>
+                              {({ active }) => (
+                                <Link
+                                  to={lang.to}
+                                  className={classNames(
+                                    location.pathname === lang.to
+                                      ? "text-ch-accent bg-ch-surface-raised"
+                                      : active
+                                        ? "text-ch-text bg-ch-surface-raised"
+                                        : "text-ch-muted",
+                                    "block px-4 py-2 text-sm transition-colors"
+                                  )}
+                                >
+                                  {lang.name}
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          ))}
                         </Menu.Items>
                       </Transition>
                     </Menu>
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Link
-                  to="#"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  title="Work in Progress..."
-                >
-                  <span className="sr-only">Search</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
-                </Link>
+
+              {/* Right side */}
+              <div className="absolute inset-y-0 right-0 flex items-center gap-3 pr-2 sm:static sm:inset-auto sm:pr-0">
+                {/* Username display */}
+                {user && username && (
+                  <span className="hidden md:block text-sm text-ch-muted font-code">
+                    @{username}
+                  </span>
+                )}
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://img.freepik.com/free-icon/google-contacts_318-559965.jpg"
-                        alt=""
-                      />
-                    </Menu.Button>
-                  </div>
+                <Menu as="div" className="relative">
+                  <Menu.Button className="flex items-center justify-center w-9 h-9 rounded-full bg-ch-surface border border-ch-accent/40 text-ch-accent font-code text-xs font-bold focus:outline-none focus:ring-2 focus:ring-ch-accent focus:ring-offset-2 focus:ring-offset-ch-dark transition-colors hover:border-ch-accent">
+                    <span className="sr-only">Open user menu</span>
+                    {getInitials()}
+                  </Menu.Button>
                   <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
@@ -163,20 +159,20 @@ export default function Header() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-lg bg-ch-surface border border-ch-border py-1 shadow-xl shadow-black/30 focus:outline-none">
                       <Menu.Item>
                         {user ? (
                           <>
-                            <span className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-700 truncate max-w-[12rem] transition-colors duration-150">
+                            <span className="block px-4 py-2.5 text-sm font-medium text-ch-text border-b border-ch-border">
                               <span role="img" aria-label="Hat" className="mr-1">
                                 🎩
                               </span>{" "}
-                              Welcome, {username}
+                              {username || "User"}
                             </span>
 
                             <Link
                               to="/userprofile"
-                              className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black transition-colors duration-150"
+                              className="flex items-center gap-2 px-4 py-2 text-sm text-ch-muted hover:text-ch-text hover:bg-ch-surface-raised transition-colors duration-150"
                             >
                               <svg
                                 className="w-4 h-4"
@@ -196,7 +192,7 @@ export default function Header() {
 
                             <button
                               onClick={handleSignOut}
-                              className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:text-red-700 flex items-center gap-2 transition-colors duration-150"
+                              className="w-full text-left px-4 py-2 text-sm text-ch-danger hover:bg-ch-surface-raised flex items-center gap-2 transition-colors duration-150"
                             >
                               <svg
                                 className="w-4 h-4"
@@ -217,7 +213,7 @@ export default function Header() {
                         ) : (
                           <Link
                             to="/login"
-                            className="w-full block text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-black rounded-md transition-colors duration-150"
+                            className="block px-4 py-2 text-sm text-ch-muted hover:text-ch-text hover:bg-ch-surface-raised transition-colors duration-150"
                           >
                             Login
                           </Link>
@@ -230,82 +226,44 @@ export default function Header() {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
+          {/* Mobile menu panel */}
+          <Disclosure.Panel className="sm:hidden border-t border-ch-border">
+            <div className="space-y-1 px-3 pt-3 pb-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.to}
                   className={classNames(
                     location.pathname === item.to
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
+                      ? "text-ch-accent bg-ch-surface"
+                      : "text-ch-muted hover:text-ch-text hover:bg-ch-surface",
+                    "block rounded-md px-3 py-2 text-base font-medium transition-colors"
                   )}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Menu as="div" className="relative">
-                <div>
-                  <Menu.Button className="flex">
-                    <span className="sr-only">Open user menu</span>
-                    <span className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base font-medium">
-                      Online Compilers
-                    </span>
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          to="/pythoncompiler"
-                          className={classNames(
-                            active ? "bg-gray-300" : "",
-                            "block px-4 py-2 text-sm text-gray-800"
-                          )}
-                        >
-                          Python
-                        </Link>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          to="/javacompiler"
-                          className={classNames(
-                            active ? "bg-gray-300" : "",
-                            "block px-4 py-2 text-sm text-gray-800"
-                          )}
-                        >
-                          Java
-                        </Link>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <span
-                          title="Coming Soon"
-                          className={classNames(
-                            "block px-4 py-2 text-sm text-gray-400 cursor-not-allowed"
-                          )}
-                        >
-                          C++ (Coming Soon)
-                        </span>
-                      )}
-                    </Menu.Item>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
+
+              {/* Compiler sub-links in mobile */}
+              <div className="pt-1">
+                <span className="block px-3 py-2 text-xs font-code uppercase tracking-wider text-ch-muted/60">
+                  Compiler
+                </span>
+                {compilerLinks.map((lang) => (
+                  <Link
+                    key={lang.name}
+                    to={lang.to}
+                    className={classNames(
+                      location.pathname === lang.to
+                        ? "text-ch-accent bg-ch-surface"
+                        : "text-ch-muted hover:text-ch-text hover:bg-ch-surface",
+                      "block rounded-md px-3 pl-6 py-2 text-sm font-medium transition-colors"
+                    )}
+                  >
+                    {lang.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </Disclosure.Panel>
         </>
