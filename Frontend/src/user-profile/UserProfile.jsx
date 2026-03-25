@@ -173,7 +173,7 @@ const ProfilePage = () => {
 
   return (
     <>
-{isLoading ? (
+      {isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <ScaleLoader
             cssOverride={override}
@@ -197,7 +197,7 @@ const ProfilePage = () => {
                 {/* Profile Info Card */}
                 <div className="bg-white p-4 sm:p-6 border-t-4 border-green-400 rounded-lg shadow-sm">
                   {/* Username */}
-                  {userName && (
+                  {username && (
                     <div className="mb-2">
                       <span className="text-gray-500 text-sm font-medium">
                         @{username}
@@ -272,7 +272,7 @@ const ProfilePage = () => {
                     {/* GitHub */}
                     <div className="text-center">
                       {profileData?.C_Github ? (
-                        
+
                         <a href={ensureHttps(profileData.C_Github)}
                           className="text-gray-700 block hover:text-gray-900 transition-colors"
                           target="_blank"
@@ -307,7 +307,7 @@ const ProfilePage = () => {
                     {/* LinkedIn */}
                     <div className="text-center">
                       {profileData?.C_LinkedIn ? (
-                        
+
                         <a href={ensureHttps(profileData.C_LinkedIn)}
                           className="text-gray-700 block hover:text-gray-900 transition-colors"
                           target="_blank"
@@ -342,7 +342,7 @@ const ProfilePage = () => {
                     {/* Website */}
                     <div className="text-center">
                       {profileData?.C_Website ? (
-                        
+
                         <a href={ensureHttps(profileData.C_Website)}
                           className="text-gray-700 block hover:text-gray-900 transition-colors"
                           target="_blank"
@@ -487,7 +487,7 @@ const ProfilePage = () => {
                           </div>
                           {profileData && (
                             <div className="text-gray-600">
-                              
+
                               <a className="text-blue-800 hover:text-blue-900 transition-colors"
                                 href={`mailto:${profileData.C_Email}`}
                               >
@@ -573,8 +573,8 @@ const ProfilePage = () => {
                       </div>
                       <div className="space-y-3">
                         {profileData &&
-                        profileData.C_Experience &&
-                        profileData.C_Experience.length > 0 ? (
+                          profileData.C_Experience &&
+                          profileData.C_Experience.length > 0 ? (
                           profileData.C_Experience.map((exp, index) => (
                             <div
                               key={index}
@@ -632,8 +632,8 @@ const ProfilePage = () => {
                       </div>
                       <div className="space-y-3">
                         {profileData &&
-                        profileData.C_Education &&
-                        profileData.C_Education.length > 0 ? (
+                          profileData.C_Education &&
+                          profileData.C_Education.length > 0 ? (
                           profileData.C_Education.map((edu, index) => (
                             <div
                               key={index}
@@ -647,32 +647,32 @@ const ProfilePage = () => {
                                 {edu.isOngoing
                                   ? "Ongoing"
                                   : edu.endDate && formatDate(edu.endDate)}
-                             </div>
-                             {edu.description && (
-                               <div className="text-gray-600 text-sm">
-                                 {edu.description}
-                               </div>
-                             )}
-                           </div>
-                         ))
-                       ) : (
-                         <div className="text-gray-500 text-sm">
-                           No education data available
-                         </div>
-                       )}
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     ) : (
-       <NoUserError />
-     )}
-</>
- );
+                              </div>
+                              {edu.description && (
+                                <div className="text-gray-600 text-sm">
+                                  {edu.description}
+                                </div>
+                              )}
+                            </div>
+                          ))
+                        ) : (
+                          <div className="text-gray-500 text-sm">
+                            No education data available
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <NoUserError />
+      )}
+    </>
+  );
 };
 
 export default ProfilePage;
