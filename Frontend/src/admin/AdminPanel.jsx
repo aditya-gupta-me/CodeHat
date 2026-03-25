@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { auth } from "../Firebase";
+import { useAuth } from "../context/AuthContext";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 
 function AdminPanel() {
-  const [user, setUser] = useState(null);
+  const { user, loading: authLoading } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [problems, setProblems] = useState([]);
   const [formData, setFormData] = useState({
@@ -30,16 +30,14 @@ function AdminPanel() {
   const backend_api = import.meta.env.VITE_BACKEND_API;
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      if (authUser) {
-        setUser(authUser);
-        await checkAdminStatus(authUser);
-      } else {
-        setLoading(false);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+    if (authLoading) return;
+
+    if (user) {
+      checkAdminStatus(user);
+    } else {
+      setLoading(false);
+    }
+  }, [user, authLoading]);
 
   const showNotification = (message, type = "success") => {
     setNotification({ message, type });
