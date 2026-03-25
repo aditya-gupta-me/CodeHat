@@ -1,47 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../Firebase";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
 import NoUserError from "../errors/NoUserError";
 import { ScaleLoader } from "react-spinners";
 import jsPDF from "jspdf";
+import { useAuth } from "../context/AuthContext";
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [authLoading, setAuthLoading] = useState(true);
   const navigate = useNavigate();
   const backend_api = import.meta.env.VITE_BACKEND_API;
-  const db = getFirestore();
-
-  // Function to fetch user name from Firestore
-  const fetchUserName = async (userId) => {
-    try {
-      const userDoc = await getDoc(doc(db, "users", userId));
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        setUserName(userData.username || userData.displayName || userData.name || "User");
-      }
-    } catch (error) {
-      console.error("Error fetching user name:", error);
-      setUserName("User");
-    }
-  };
-
-  // Handle authentication state
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      setUser(authUser);
-      if (authUser) {
-        fetchUserName(authUser.uid);
-      }
-      setAuthLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { user, username, loading: authLoading } = useAuth();
 
   // Fetch profile data when user is authenticated
   useEffect(() => {
@@ -231,7 +200,7 @@ const ProfilePage = () => {
                   {userName && (
                     <div className="mb-2">
                       <span className="text-gray-500 text-sm font-medium">
-                        @{userName}
+                        @{username}
                       </span>
                     </div>
                   )}
