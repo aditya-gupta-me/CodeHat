@@ -215,22 +215,18 @@ const ProfilePage = () => {
         </div>
       ) : user ? (
         <div
-          className="min-h-screen bg-gray-50 dark:bg-white px-4 sm:px-6 lg:px-16 py-5"
-          style={{
-            backgroundImage: "linear-gradient(to right, #38a3a5, #57cc99)",
-            color: "#fff",
-          }}
+          className="min-h-screen bg-ch-dark px-4 sm:px-6 lg:px-16 py-5"
         >
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-start">
               {/* Left Sidebar */}
               <div className="w-full lg:w-1/3 lg:sticky lg:top-4">
                 {/* Profile Info Card */}
-                <div className="bg-white p-4 sm:p-6 border-t-4 border-green-400 rounded-lg shadow-sm">
+                <div className="card-surface p-4 sm:p-6 border-t-4 border-ch-accent rounded-lg">
                   {/* Username */}
                   {userName && (
                     <div className="mb-2">
-                      <span className="text-gray-500 text-sm font-medium">
+                      <span className="text-ch-muted text-sm font-medium font-code">
                         @{userName}
                       </span>
                     </div>
@@ -239,7 +235,7 @@ const ProfilePage = () => {
                   {/* Full Name */}
                   {profileData && (
                     <div className="mb-3">
-                      <h1 className="text-gray-900 font-bold text-xl sm:text-2xl leading-8">
+                      <h1 className="text-ch-text font-bold text-xl sm:text-2xl leading-8">
                         {profileData.C_FName} {profileData.C_LName}
                       </h1>
                     </div>
@@ -247,19 +243,19 @@ const ProfilePage = () => {
 
                   {/* Profile Tagline */}
                   {profileData && (
-                    <h3 className="text-gray-600 font-medium text-base sm:text-lg mb-4">
+                    <h3 className="text-ch-muted font-medium text-base sm:text-lg mb-4">
                       {profileData.C_TagLine}
                     </h3>
                   )}
 
                   {/* Account Status */}
-                  <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 divide-y rounded shadow-sm">
+                  <ul className="bg-ch-surface-raised text-ch-muted py-2 px-3 divide-y divide-ch-border rounded">
                     <li className="flex items-center justify-between py-3">
                       <span className="text-sm sm:text-base">
                         Account Status
                       </span>
                       {profileData && (
-                        <span className="bg-green-500 py-1 px-2 rounded text-white text-xs sm:text-sm">
+                        <span className="bg-ch-accent py-1 px-2 rounded text-ch-dark text-xs sm:text-sm font-semibold">
                           {profileData.C_Status === true
                             ? "Active"
                             : "Inactive"}
@@ -278,9 +274,9 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Social Links Card */}
-                <div className="bg-white p-4 sm:p-6 hover:shadow rounded-lg mt-4">
-                  <div className="flex items-center space-x-3 font-semibold text-gray-900 text-lg sm:text-xl leading-8 mb-4">
-                    <span className="text-green-500">
+                <div className="card-surface p-4 sm:p-6 rounded-lg mt-4">
+                  <div className="flex items-center space-x-3 font-semibold text-ch-text text-lg sm:text-xl leading-8 mb-4">
+                    <span className="text-ch-accent">
                       <svg
                         className="h-5 w-5 fill-current"
                         xmlns="http://www.w3.org/2000/svg"
@@ -411,9 +407,9 @@ const ProfilePage = () => {
               {/* Main Content */}
               <div className="w-full lg:w-2/3 space-y-4">
                 {/* About Section */}
-                <div className="bg-white p-4 sm:p-6 shadow-sm rounded-lg">
-                  <div className="flex items-center space-x-2 font-semibold text-gray-700 leading-8 mb-6">
-                    <span className="text-green-500">
+                <div className="card-surface p-4 sm:p-6 shadow-sm rounded-lg">
+                  <div className="flex items-center space-x-2 font-semibold text-ch-muted leading-8 mb-6">
+                    <span className="text-ch-accent">
                       <svg
                         className="h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
@@ -437,16 +433,16 @@ const ProfilePage = () => {
                   {/* Professional Summary */}
                   {profileData && profileData.C_Description && (
                     <div className="mb-6">
-                      <h4 className="text-gray-800 font-semibold text-base mb-3">
+                      <h4 className="text-ch-text font-semibold text-base mb-3">
                         Professional Summary
                       </h4>
-                      <p className="text-gray-600 text-sm leading-6">
+                      <p className="text-ch-muted text-sm leading-6">
                         {profileData.C_Description}
                       </p>
                     </div>
                   )}
 
-                  <div className="text-gray-700">
+                  <div className="text-ch-muted">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                       <div className="space-y-3">
                         <div className="flex flex-col sm:flex-row sm:items-center">
@@ -454,7 +450,7 @@ const ProfilePage = () => {
                             First Name
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               {profileData.C_FName}
                             </div>
                           )}
@@ -464,7 +460,7 @@ const ProfilePage = () => {
                             Last Name
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               {profileData.C_LName}
                             </div>
                           )}
@@ -474,7 +470,7 @@ const ProfilePage = () => {
                             Gender
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               {profileData.C_Gender}
                             </div>
                           )}
@@ -484,7 +480,7 @@ const ProfilePage = () => {
                             Contact No.
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               {profileData.C_PhoneNo}
                             </div>
                           )}
@@ -497,7 +493,7 @@ const ProfilePage = () => {
                             Address
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               {profileData.C_Address}
                             </div>
                           )}
@@ -507,7 +503,7 @@ const ProfilePage = () => {
                             Birthday
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               {formatDate(profileData.C_DOB)}
                             </div>
                           )}
@@ -517,9 +513,9 @@ const ProfilePage = () => {
                             Email
                           </div>
                           {profileData && (
-                            <div className="text-gray-600">
+                            <div className="text-ch-muted">
                               
-                              <a className="text-blue-800 hover:text-blue-900 transition-colors"
+                              <a className="text-ch-accent hover:text-ch-accent transition-colors"
                                 href={`mailto:${profileData.C_Email}`}
                               >
                                 {profileData.C_Email}
@@ -531,7 +527,7 @@ const ProfilePage = () => {
                           <div className="font-semibold mb-1 sm:mb-0 sm:w-32 sm:flex-shrink-0">
                             Profile Views
                           </div>
-                          <div className="text-gray-600">N/A</div>
+                          <div className="text-ch-muted">N/A</div>
                         </div>
                       </div>
                     </div>
@@ -544,7 +540,7 @@ const ProfilePage = () => {
                         onClick={() =>
                           navigate("/updateprofile", { state: profileData })
                         }
-                        className="flex items-center justify-center text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors"
+                        className="flex items-center justify-center text-ch-muted hover:text-ch-text text-sm font-medium transition-colors"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -559,7 +555,7 @@ const ProfilePage = () => {
                       </button>
                       <button
                         onClick={downloadPDFProfile}
-                        className="flex items-center justify-center text-gray-600 hover:text-gray-800 text-sm font-medium transition-colors"
+                        className="flex items-center justify-center text-ch-muted hover:text-ch-text text-sm font-medium transition-colors"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -577,12 +573,12 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Experience and Education Section */}
-                <div className="bg-white p-4 sm:p-6 shadow-sm rounded-lg">
+                <div className="card-surface p-4 sm:p-6 shadow-sm rounded-lg">
                   <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                     {/* Experience */}
                     <div>
-                      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-4">
-                        <span className="text-green-500">
+                      <div className="flex items-center space-x-2 font-semibold text-ch-text leading-8 mb-4">
+                        <span className="text-ch-accent">
                           <svg
                             className="h-5 w-5"
                             xmlns="http://www.w3.org/2000/svg"
@@ -621,7 +617,7 @@ const ProfilePage = () => {
                                   : exp.endDate && formatDate(exp.endDate)}
                               </div>
                               {exp.description && (
-                                <div className="text-gray-600 text-sm">
+                                <div className="text-ch-muted text-sm">
                                   {exp.description}
                                 </div>
                               )}
@@ -637,8 +633,8 @@ const ProfilePage = () => {
 
                     {/* Education */}
                     <div>
-                      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-4">
-                        <span className="text-green-500">
+                      <div className="flex items-center space-x-2 font-semibold text-ch-text leading-8 mb-4">
+                        <span className="text-ch-accent">
                           <svg
                             className="h-5 w-5"
                             xmlns="http://www.w3.org/2000/svg"
@@ -680,7 +676,7 @@ const ProfilePage = () => {
                                   : edu.endDate && formatDate(edu.endDate)}
                              </div>
                              {edu.description && (
-                               <div className="text-gray-600 text-sm">
+                               <div className="text-ch-muted text-sm">
                                  {edu.description}
                                </div>
                              )}

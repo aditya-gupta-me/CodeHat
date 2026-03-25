@@ -109,7 +109,7 @@ public class HelloWorld {
 
   if (isAuthenticating) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-slate-900">
+      <div className="flex flex-col justify-center items-center h-screen bg-ch-dark">
         <ScaleLoader color="#38bdf8" loading={isAuthenticating} />
         <DisplayQuotes />
       </div>
@@ -118,7 +118,7 @@ public class HelloWorld {
 
   if (isAuthenticating) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen bg-slate-900">
+      <div className="flex flex-col justify-center items-center h-screen bg-ch-dark">
         <ScaleLoader color={"#38bdf8"} loading={isAuthenticating} />
         <DisplayQuotes />
       </div>
@@ -126,13 +126,13 @@ public class HelloWorld {
   }
 
   return (
-    <div className="bg-slate-900 font-sans">
+    <div className="bg-ch-dark font-sans">
       <div className="container mx-auto p-4 md:p-6 lg:p-8">
         {/* Top Action Bar */}
         <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-          <h1 className="text-2xl font-bold text-slate-100">Java Playground</h1>
+          <h1 className="text-2xl font-bold text-ch-text">Java Playground</h1>
           <button
-            className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+            className="inline-flex items-center justify-center px-8 py-3 bg-ch-accent text-white font-medium rounded-lg shadow-lg transition-all duration-200 hover:bg-ch-accent-hover hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
             onClick={submitCode}
             disabled={isSubmitting}
           >
@@ -186,11 +186,11 @@ public class HelloWorld {
           {/* Left Column - Code Editor (Takes up 2/3 on large screens) */}
           <div className="xl:col-span-2 space-y-6">
             {/* Code Editor */}
-            <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
-              <div className="bg-slate-700 px-6 py-3 border-b border-slate-600">
-                <h2 className="text-lg font-semibold text-slate-100 flex items-center">
+            <div className="bg-ch-surface border border-ch-border rounded-xl shadow-2xl overflow-hidden">
+              <div className="bg-ch-surface-raised px-6 py-3 border-b border-ch-border">
+                <h2 className="text-lg font-semibold text-ch-text flex items-center">
                   <svg
-                    className="w-5 h-5 mr-2 text-blue-400"
+                    className="w-5 h-5 mr-2 text-ch-accent"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -211,9 +211,9 @@ public class HelloWorld {
             </div>
 
             {/* Output Panel */}
-            <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
-              <div className="bg-slate-700 px-6 py-3 border-b border-slate-600 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-slate-100 flex items-center">
+            <div className="bg-ch-surface border border-ch-border rounded-xl shadow-2xl overflow-hidden">
+              <div className="bg-ch-surface-raised px-6 py-3 border-b border-ch-border flex justify-between items-center">
+                <h3 className="text-lg font-semibold text-ch-text flex items-center">
                   <svg
                     className="w-5 h-5 mr-2 text-green-400"
                     fill="none"
@@ -233,7 +233,7 @@ public class HelloWorld {
                   <button
                     onClick={copyOutputToClipboard}
                     disabled={!output}
-                    className="px-3 py-1.5 text-sm font-medium bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                    className="px-3 py-1.5 text-sm font-medium bg-ch-surface-raised text-ch-text rounded-md hover:bg-ch-surface transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                   >
                     <svg
                       className="w-4 h-4 mr-1"
@@ -253,7 +253,7 @@ public class HelloWorld {
                   <button
                     onClick={downloadOutput}
                     disabled={!output}
-                    className="px-3 py-1.5 text-sm font-medium bg-slate-600 text-slate-200 rounded-md hover:bg-slate-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                    className="px-3 py-1.5 text-sm font-medium bg-ch-surface-raised text-ch-text rounded-md hover:bg-ch-surface transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                   >
                     <svg
                       className="w-4 h-4 mr-1"
@@ -273,7 +273,7 @@ public class HelloWorld {
                 </div>
               </div>
               <div className="p-6">
-                <pre className="w-full bg-slate-900 text-slate-300 rounded-lg p-4 min-h-[200px] whitespace-pre-wrap text-sm font-mono border border-slate-600">
+                <pre className="w-full bg-ch-dark text-ch-muted rounded-lg p-4 min-h-[200px] whitespace-pre-wrap text-sm font-mono border border-ch-border">
                   {output || "Your code's output will appear here..."}
                 </pre>
               </div>
@@ -282,9 +282,9 @@ public class HelloWorld {
 
           {/* Right Column - Input Panel (Takes up 1/3 on large screens) */}
           <div className="xl:col-span-1">
-            <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl overflow-hidden sticky top-6">
-              <div className="bg-slate-700 px-6 py-3 border-b border-slate-600">
-                <h3 className="text-lg font-semibold text-slate-100 flex items-center">
+            <div className="bg-ch-surface border border-ch-border rounded-xl shadow-2xl overflow-hidden sticky top-6">
+              <div className="bg-ch-surface-raised px-6 py-3 border-b border-ch-border">
+                <h3 className="text-lg font-semibold text-ch-text flex items-center">
                   <svg
                     className="w-5 h-5 mr-2 text-purple-400"
                     fill="none"
@@ -344,9 +344,9 @@ public class HelloWorld {
                   </button>
                 </div>
 
-                <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+                <p className="text-xs text-ch-muted mb-4 leading-relaxed">
                   Add inputs for your Java{" "}
-                  <code className="bg-slate-700 px-1 rounded text-slate-300">
+                  <code className="bg-ch-surface-raised px-1 rounded text-ch-muted">
                     input()
                   </code>{" "}
                   functions. They'll be used in order.
@@ -356,7 +356,7 @@ public class HelloWorld {
                   {inputs.map((input, index) => (
                     <div key={index} className="group">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-medium text-slate-400">
+                        <span className="text-xs font-medium text-ch-muted">
                           Input #{index + 1}
                         </span>
                         {inputs.length > 1 && (
@@ -387,24 +387,24 @@ public class HelloWorld {
                           handleInputChange(index, e.target.value)
                         }
                         placeholder={`Value for input ${index + 1}`}
-                        className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 text-sm"
+                        className="w-full px-3 py-2 bg-ch-surface-raised border border-ch-border rounded-md text-ch-text placeholder-ch-muted focus:outline-none focus:ring-2 focus:ring-ch-accent focus:border-transparent transition-colors duration-200 text-sm"
                       />
                     </div>
                   ))}
                 </div>
 
                 {inputs.filter((i) => i.trim()).length > 0 && (
-                  <div className="mt-4 p-3 bg-slate-700 rounded-lg border border-slate-600">
-                    <p className="text-xs text-slate-400 mb-2">Preview:</p>
+                  <div className="mt-4 p-3 bg-ch-surface-raised rounded-lg border border-ch-border">
+                    <p className="text-xs text-ch-muted mb-2">Preview:</p>
                     <div className="space-y-1">
                       {inputs
                         .filter((i) => i.trim())
                         .map((input, index) => (
                           <div
                             key={index}
-                            className="text-xs text-slate-300 font-mono"
+                            className="text-xs text-ch-muted font-mono"
                           >
-                            <span className="text-slate-500">
+                            <span className="text-ch-muted">
                               #{index + 1}:
                             </span>{" "}
                             "{input}"
