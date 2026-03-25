@@ -1,4 +1,3 @@
-
 const AboutUs = () => {
   const teamMembers = [
     { name: "Aditya Gupta" },
@@ -9,7 +8,7 @@ const AboutUs = () => {
 
   return (
     <>
-<main className="bg-white min-h-screen py-16 px-6 font-inter text-gray-900">
+      <main className="bg-white min-h-screen py-16 px-6 font-inter text-gray-900">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold mb-2">About Us</h1>
           <h2 className="text-gray-500 font-medium text-base mb-10">
@@ -17,17 +16,15 @@ const AboutUs = () => {
           </h2>
 
           <p className="text-[0.95rem] leading-relaxed mb-6">
-            <span className="font-semibold">CodeHat</span> is a platform
-            designed to make coding education accessible, engaging, and focused
-            on skill development. We believe in creating an environment where
-            learners can practice, compete, and grow without the pressure of
+            <span className="font-semibold">CodeHat</span> is a platform designed to make coding
+            education accessible, engaging, and focused on skill development. We believe in creating
+            an environment where learners can practice, compete, and grow without the pressure of
             ranks or popularity.
           </p>
 
           <p className="text-[0.95rem] leading-relaxed mb-6">
-            Our mission is simple: provide clean, anonymous problem-solving
-            through a level-based approach that emphasizes fair competition and
-            meaningful learning.
+            Our mission is simple: provide clean, anonymous problem-solving through a level-based
+            approach that emphasizes fair competition and meaningful learning.
           </p>
 
           <hr className="my-10 border-gray-300" />
@@ -61,9 +58,7 @@ const AboutUs = () => {
             {/* Bottom decorative line */}
             <div className="mt-4 flex items-center gap-2 text-gray-300">
               <div className="h-px flex-1 bg-gray-200"></div>
-              <span className="text-xs font-mono">
-                team.length = {teamMembers.length}
-              </span>
+              <span className="text-xs font-mono">team.length = {teamMembers.length}</span>
               <div className="h-px flex-1 bg-gray-200"></div>
             </div>
           </div>
@@ -76,40 +71,34 @@ const AboutUs = () => {
             <div>
               <h4 className="text-base font-semibold mb-1">Innovation</h4>
               <p className="text-[0.95rem] leading-relaxed text-gray-700">
-                Continuously improving our platform to enhance the learning
-                experience.
+                Continuously improving our platform to enhance the learning experience.
               </p>
             </div>
 
             <div>
               <h4 className="text-base font-semibold mb-1">Community</h4>
               <p className="text-[0.95rem] leading-relaxed text-gray-700">
-                Building a supportive environment where learners help each other
-                grow.
+                Building a supportive environment where learners help each other grow.
               </p>
             </div>
 
             <div>
               <h4 className="text-base font-semibold mb-1">Excellence</h4>
               <p className="text-[0.95rem] leading-relaxed text-gray-700">
-                Committed to delivering high-quality content and a seamless user
-                experience.
+                Committed to delivering high-quality content and a seamless user experience.
               </p>
             </div>
           </div>
 
           <p className="text-[0.95rem] leading-relaxed mt-10">
-            Whether you're just starting out or you're a seasoned developer,
-            CodeHat has something for you. Join us on this journey to master
-            programming.
+            Whether you're just starting out or you're a seasoned developer, CodeHat has something
+            for you. Join us on this journey to master programming.
           </p>
 
-          <p className="text-sm text-gray-500 mt-10 italic">
-            Last updated: November 2025
-          </p>
+          <p className="text-sm text-gray-500 mt-10 italic">Last updated: November 2025</p>
         </div>
       </main>
-</>
+    </>
   );
 };
 

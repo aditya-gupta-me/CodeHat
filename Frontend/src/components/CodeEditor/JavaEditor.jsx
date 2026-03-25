@@ -26,8 +26,7 @@ export default function JavaEditor({ value, onChange }) {
               // Add common Java keywords and methods
               (context) => {
                 const word = context.matchBefore(/\w*/);
-                if (!word || (word.from === word.to && !context.explicit))
-                  return null;
+                if (!word || (word.from === word.to && !context.explicit)) return null;
                 return {
                   from: word.from,
                   options: [

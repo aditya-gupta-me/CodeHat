@@ -19,7 +19,7 @@ const ResetPasswordConfirmation = () => {
     message: "",
   });
 
-  const oobCode = searchParams.get('oobCode');
+  const oobCode = searchParams.get("oobCode");
 
   useEffect(() => {
     const verifyCode = async () => {
@@ -67,11 +67,10 @@ const ResetPasswordConfirmation = () => {
     try {
       await confirmPasswordReset(auth, oobCode, password);
       showAlert("success", "Password reset successful! Redirecting to login...", false);
-      
+
       setTimeout(() => {
         navigate("/login");
       }, 2000);
-      
     } catch (error) {
       showAlert("error", "Failed to reset password. Please try again.");
     } finally {
@@ -82,10 +81,12 @@ const ResetPasswordConfirmation = () => {
   if (!validCode) {
     return (
       <>
-<div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-red-600 mb-4">Invalid Reset Link</h1>
-            <p className="text-gray-600 mb-4">This password reset link is invalid or has expired.</p>
+            <p className="text-gray-600 mb-4">
+              This password reset link is invalid or has expired.
+            </p>
             <button
               onClick={() => navigate("/forgot-password")}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
@@ -94,13 +95,13 @@ const ResetPasswordConfirmation = () => {
             </button>
           </div>
         </div>
-</>
+      </>
     );
   }
 
   return (
     <>
-{alert.show && (
+      {alert.show && (
         <div className="fixed top-4 right-4 z-50 w-full max-w-sm px-4">
           <Alert
             type={alert.type}
@@ -120,13 +121,14 @@ const ResetPasswordConfirmation = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Set New Password
               </h1>
-              <p className="text-sm text-gray-600">
-                Enter a new password for {email}
-              </p>
-              
+              <p className="text-sm text-gray-600">Enter a new password for {email}</p>
+
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
+                  <label
+                    htmlFor="password"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
                     New Password
                   </label>
                   <input
@@ -141,7 +143,10 @@ const ResetPasswordConfirmation = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
                     Confirm Password
                   </label>
                   <input
@@ -169,7 +174,7 @@ const ResetPasswordConfirmation = () => {
           </div>
         </div>
       </section>
-</>
+    </>
   );
 };
 

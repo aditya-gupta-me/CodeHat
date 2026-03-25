@@ -42,9 +42,7 @@ function Footer() {
         let visitorId = localStorage.getItem("visitorId");
 
         if (!visitorId) {
-          visitorId = `visitor_${Date.now()}_${Math.random()
-            .toString(36)
-            .substr(2, 9)}`;
+          visitorId = `visitor_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
           localStorage.setItem("visitorId", visitorId);
         }
 
@@ -94,11 +92,7 @@ function Footer() {
         <div className="mb-8 flex flex-col md:flex-row justify-between gap-4 md:gap-8">
           {/* Code execution counter */}
           <div className="flex items-center space-x-3 text-gray-400">
-            <svg
-              className="w-5 h-5 text-blue-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
+            <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
                 d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
@@ -122,11 +116,7 @@ function Footer() {
 
           {/* Visitor counter */}
           <div className="flex items-center space-x-3 text-gray-400 justify-end">
-            <svg
-              className="w-5 h-5 text-green-500"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
+            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
               <path
                 fillRule="evenodd"
@@ -140,9 +130,7 @@ function Footer() {
               ) : (
                 <>
                   Visited by over{" "}
-                  <span className="font-semibold text-white">
-                    {formatNumber(visitorCount)}
-                  </span>{" "}
+                  <span className="font-semibold text-white">{formatNumber(visitorCount)}</span>{" "}
                   people
                 </>
               )}
@@ -178,11 +166,7 @@ function Footer() {
                 </li>
                 <li>
                   {/* TODO: Add community features */}
-                  <a
-                    href="#"
-                    className="hover:underline"
-                    title="Work in Progress..."
-                  >
+                  <a href="#" className="hover:underline" title="Work in Progress...">
                     Community
                   </a>
                 </li>

@@ -14,8 +14,7 @@ const NoLoginError = () => {
             Login Required
           </p>
           <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-            You need to be logged in to access this page. Please login to
-            continue.
+            You need to be logged in to access this page. Please login to continue.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link

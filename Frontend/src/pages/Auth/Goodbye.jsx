@@ -35,11 +35,9 @@ const Goodbye = () => {
 
   return (
     <>
-<main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-3xl mx-auto text-center bg-white rounded-xl shadow-md p-6 md:p-10">
-          <h1 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">
-            Goodbye 👋
-          </h1>
+          <h1 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">Goodbye 👋</h1>
           <p className="text-lg md:text-xl text-gray-600 mb-6">
             Your account has been successfully deleted.
           </p>
@@ -47,12 +45,11 @@ const Goodbye = () => {
           <div className="text-left border-t border-gray-200 pt-6">
             <p className="text-gray-700 text-base mb-4">
               Thank you for being part of{" "}
-              <span className="font-semibold text-blue-600">CodeHat™</span>. We
-              appreciate your time with us.
+              <span className="font-semibold text-blue-600">CodeHat™</span>. We appreciate your time
+              with us.
             </p>
             <p className="text-gray-700 text-base mb-4">
-              All your data has been permanently removed from our systems,
-              including:
+              All your data has been permanently removed from our systems, including:
             </p>
             <ul className="list-disc list-inside text-gray-700 space-y-2 pl-4">
               <li>Your profile information</li>
@@ -65,8 +62,7 @@ const Goodbye = () => {
           <div className="mt-8">
             <p className="text-gray-600 mb-4">
               Redirecting to homepage in{" "}
-              <span className="font-semibold text-blue-600">{countdown}</span>{" "}
-              seconds...
+              <span className="font-semibold text-blue-600">{countdown}</span> seconds...
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -86,7 +82,7 @@ const Goodbye = () => {
           </div>
         </div>
       </main>
-</>
+    </>
   );
 };
 

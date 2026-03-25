@@ -84,8 +84,7 @@ const formatFunctionSignature = (functionSignature, testCase) => {
 
   if (params.length === 0 && testCase?.input) {
     // If no parameters defined but input exists, use input keys
-    const inputKeys =
-      typeof testCase.input === "object" ? Object.keys(testCase.input) : [];
+    const inputKeys = typeof testCase.input === "object" ? Object.keys(testCase.input) : [];
     return `def ${funcName}(${inputKeys.join(", ")}):`;
   }
 
@@ -252,52 +251,47 @@ function ProblemSolver() {
   if (isLoadingAuth) {
     return (
       <>
-<div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             <div className="flex justify-center items-center h-screen">
-              <ScaleLoader
-                css={override}
-                size={100}
-                color={"#123abc"}
-                loading={isLoadingAuth}
-              />
+              <ScaleLoader css={override} size={100} color={"#123abc"} loading={isLoadingAuth} />
               <DisplayQuotes />
             </div>
           </main>
         </div>
-</>
+      </>
     );
   }
 
   if (!user) {
     return (
       <>
-<div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col">
           <main className="flex-grow">
             <NoLoginError />
           </main>
         </div>
-</>
+      </>
     );
   }
 
   if (loading) {
     return (
       <>
-<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
             <p className="text-gray-600 font-medium">Loading problem...</p>
           </div>
         </div>
-</>
+      </>
     );
   }
 
   if (error) {
     return (
       <>
-<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center bg-white p-8 rounded-xl shadow-lg max-w-md">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -318,13 +312,13 @@ function ProblemSolver() {
             <p className="text-gray-600">{error}</p>
           </div>
         </div>
-</>
+      </>
     );
   }
 
   return (
     <>
-<div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-160px)]">
             {/* Left Panel - Problem Description */}
@@ -334,8 +328,7 @@ function ProblemSolver() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h1 className="text-xl font-bold text-gray-900 mb-2">
-                      {problem?.problemId || "N/A"}.{" "}
-                      {problem?.title || "Untitled Problem"}
+                      {problem?.problemId || "N/A"}. {problem?.title || "Untitled Problem"}
                     </h1>
                     <Link
                       to={`/solve/${id}/solution`}
@@ -376,20 +369,18 @@ function ProblemSolver() {
                 >
                   Test Cases
                 </button>
-                {problem?.hints &&
-                  problem.hints.length > 0 &&
-                  problem.hints[0] && (
-                    <button
-                      onClick={() => setActiveTab("hints")}
-                      className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
-                        activeTab === "hints"
-                          ? "border-b-2 border-blue-500 text-blue-600 bg-white"
-                          : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
-                      }`}
-                    >
-                      Hints
-                    </button>
-                  )}
+                {problem?.hints && problem.hints.length > 0 && problem.hints[0] && (
+                  <button
+                    onClick={() => setActiveTab("hints")}
+                    className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${
+                      activeTab === "hints"
+                        ? "border-b-2 border-blue-500 text-blue-600 bg-white"
+                        : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    Hints
+                  </button>
+                )}
               </div>
 
               {/* Tab Content */}
@@ -402,9 +393,7 @@ function ProblemSolver() {
                           <SafeMarkdown content={problem.description} />
                         </div>
                       ) : (
-                        <p className="text-gray-500">
-                          No description available
-                        </p>
+                        <p className="text-gray-500">No description available</p>
                       )}
 
                       {/* Function Signature */}
@@ -424,9 +413,7 @@ function ProblemSolver() {
 
                       {problem?.constraints && (
                         <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                          <h3 className="text-lg font-semibold mb-3 text-gray-900">
-                            Constraints:
-                          </h3>
+                          <h3 className="text-lg font-semibold mb-3 text-gray-900">Constraints:</h3>
                           <SafeMarkdown content={problem.constraints} />
                         </div>
                       )}
@@ -436,9 +423,7 @@ function ProblemSolver() {
 
                 {activeTab === "testcases" && (
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold mb-6 text-gray-900">
-                      Sample Test Cases
-                    </h3>
+                    <h3 className="text-lg font-semibold mb-6 text-gray-900">Sample Test Cases</h3>
                     {problem?.testCases &&
                     Array.isArray(problem.testCases) &&
                     problem.testCases.length > 0 ? (
@@ -488,9 +473,7 @@ function ProblemSolver() {
 
                 {activeTab === "hints" && (
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold mb-6 text-gray-900">
-                      Hints
-                    </h3>
+                    <h3 className="text-lg font-semibold mb-6 text-gray-900">Hints</h3>
                     {problem?.hints && problem.hints.length > 0 ? (
                       <div className="space-y-4">
                         {problem.hints
@@ -541,9 +524,7 @@ function ProblemSolver() {
               {/* Header with Action Buttons */}
               <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
                 <div className="flex items-center justify-between p-6 pb-0">
-                  <h2 className="text-lg font-semibold text-gray-900">
-                    Code Editor
-                  </h2>
+                  <h2 className="text-lg font-semibold text-gray-900">Code Editor</h2>
                   <div className="flex gap-3">
                     <button
                       onClick={runCode}
@@ -611,8 +592,7 @@ function ProblemSolver() {
                     Input/Output
                     {testResults.length > 0 && (
                       <span className="ml-2 px-2 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-medium">
-                        {testResults.filter((r) => r.passed).length}/
-                        {testResults.length}
+                        {testResults.filter((r) => r.passed).length}/{testResults.length}
                       </span>
                     )}
                   </button>
@@ -650,9 +630,7 @@ function ProblemSolver() {
                         </label>
                         <div className="w-full p-3 border border-gray-300 rounded-lg bg-white text-sm min-h-[200px] font-mono text-gray-800 whitespace-pre-wrap">
                           {customOutput || (
-                            <span className="text-gray-400">
-                              Output will appear here...
-                            </span>
+                            <span className="text-gray-400">Output will appear here...</span>
                           )}
                         </div>
                       </div>
@@ -677,8 +655,8 @@ function ProblemSolver() {
                           </svg>
                           Test Results:
                           <span className="ml-2 text-sm text-gray-600">
-                            ({testResults.filter((r) => r.passed).length} of{" "}
-                            {testResults.length} passed)
+                            ({testResults.filter((r) => r.passed).length} of {testResults.length}{" "}
+                            passed)
                           </span>
                         </h3>
                         <div className="space-y-3">
@@ -718,36 +696,27 @@ function ProblemSolver() {
                                       />
                                     </svg>
                                   )}
-                                  Test {index + 1}:{" "}
-                                  {result.passed ? "PASSED" : "FAILED"}
+                                  Test {index + 1}: {result.passed ? "PASSED" : "FAILED"}
                                 </span>
-                                <span className="text-sm opacity-75">
-                                  {result.executionTime}ms
-                                </span>
+                                <span className="text-sm opacity-75">{result.executionTime}ms</span>
                               </div>
                               {!result.passed && (
                                 <div className="mt-3 text-sm space-y-2">
                                   <div className="bg-white bg-opacity-50 p-3 rounded border-l-4 border-emerald-400">
-                                    <strong className="text-emerald-700">
-                                      Expected:
-                                    </strong>
+                                    <strong className="text-emerald-700">Expected:</strong>
                                     <pre className="mt-1 text-emerald-800 font-mono text-xs">
                                       {result.expected}
                                     </pre>
                                   </div>
                                   <div className="bg-white bg-opacity-50 p-3 rounded border-l-4 border-red-400">
-                                    <strong className="text-red-700">
-                                      Got:
-                                    </strong>
+                                    <strong className="text-red-700">Got:</strong>
                                     <pre className="mt-1 text-red-800 font-mono text-xs">
                                       {result.actual}
                                     </pre>
                                   </div>
                                   {result.error && (
                                     <div className="bg-white bg-opacity-50 p-3 rounded border-l-4 border-orange-400">
-                                      <strong className="text-orange-700">
-                                        Error:
-                                      </strong>
+                                      <strong className="text-orange-700">Error:</strong>
                                       <pre className="mt-1 text-orange-800 font-mono text-xs">
                                         {result.error}
                                       </pre>
@@ -767,7 +736,7 @@ function ProblemSolver() {
           </div>
         </div>
       </div>
-</>
+    </>
   );
 }
 

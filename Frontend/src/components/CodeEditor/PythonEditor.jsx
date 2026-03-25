@@ -19,9 +19,7 @@ export default function PythonEditor({ value, onChange }) {
           basicSetup,
           oneDark, // <-- 2. Add the theme to the extensions
           python(),
-          keymap.of([
-            indentWithTab,
-            ...defaultKeymap]),
+          keymap.of([indentWithTab, ...defaultKeymap]),
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
               const doc = update.state.doc.toString();

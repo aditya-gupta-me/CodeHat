@@ -79,9 +79,7 @@ public class HelloWorld {
       if (error.response?.data?.error) {
         setOutput(`Error: ${error.response.data.error}`);
       } else {
-        setOutput(
-          "Error: Could not connect to the server. Please try again later."
-        );
+        setOutput("Error: Could not connect to the server. Please try again later.");
       }
     } finally {
       setIsSubmitting(false);
@@ -162,12 +160,7 @@ public class HelloWorld {
               </>
             ) : (
               <>
-                <svg
-                  className="w-5 h-5 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -346,9 +339,7 @@ public class HelloWorld {
 
                 <p className="text-xs text-slate-400 mb-4 leading-relaxed">
                   Add inputs for your Java{" "}
-                  <code className="bg-slate-700 px-1 rounded text-slate-300">
-                    input()
-                  </code>{" "}
+                  <code className="bg-slate-700 px-1 rounded text-slate-300">input()</code>{" "}
                   functions. They'll be used in order.
                 </p>
 
@@ -383,9 +374,7 @@ public class HelloWorld {
                       <input
                         type="text"
                         value={input}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
+                        onChange={(e) => handleInputChange(index, e.target.value)}
                         placeholder={`Value for input ${index + 1}`}
                         className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 text-sm"
                       />
@@ -400,14 +389,8 @@ public class HelloWorld {
                       {inputs
                         .filter((i) => i.trim())
                         .map((input, index) => (
-                          <div
-                            key={index}
-                            className="text-xs text-slate-300 font-mono"
-                          >
-                            <span className="text-slate-500">
-                              #{index + 1}:
-                            </span>{" "}
-                            "{input}"
+                          <div key={index} className="text-xs text-slate-300 font-mono">
+                            <span className="text-slate-500">#{index + 1}:</span> "{input}"
                           </div>
                         ))}
                     </div>

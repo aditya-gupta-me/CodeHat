@@ -88,15 +88,10 @@ const Alert = ({
     >
       <div className="flex items-start">
         <div className="flex-shrink-0">
-          <FontAwesomeIcon
-            icon={config.icon}
-            className={classNames("h-5 w-5", config.iconColor)}
-          />
+          <FontAwesomeIcon icon={config.icon} className={classNames("h-5 w-5", config.iconColor)} />
         </div>
         <div className="ml-3 flex-1">
-          <p className={classNames("text-sm font-medium", config.textColor)}>
-            {message}
-          </p>
+          <p className={classNames("text-sm font-medium", config.textColor)}>{message}</p>
         </div>
         {dismissible && (
           <div className="ml-auto pl-3">
